@@ -39,3 +39,8 @@ dependencies {
     testCompile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.7'
     testCompile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.7'
 }
+
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.4'
+}

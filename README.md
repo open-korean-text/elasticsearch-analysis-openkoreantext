@@ -1,4 +1,4 @@
-# elasticsearch-analysis-okt
+# elasticsearch-analysis-okt [Working...]
 
 [![Build Status](https://travis-ci.org/open-korean-text/elasticsearch-analysis-okt.svg?branch=master)](https://travis-ci.org/open-korean-text/elasticsearch-analysis-okt)
 

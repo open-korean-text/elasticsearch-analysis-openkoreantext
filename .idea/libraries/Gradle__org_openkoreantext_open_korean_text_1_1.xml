@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.openkoreantext:open-korean-text:1.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.openkoreantext/open-korean-text/1.1/68a723b3305a764cbec9bab936361e707542a5e0/open-korean-text-1.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.openkoreantext/open-korean-text/1.1/9f5d68a97d1f966802b551d99d9e83905c00beff/open-korean-text-1.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

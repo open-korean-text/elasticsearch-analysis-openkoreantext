@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/elasticsearch-analysis-okt.iml" filepath="$PROJECT_DIR$/.idea/modules/elasticsearch-analysis-okt.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/elasticsearch-analysis-okt_main.iml" filepath="$PROJECT_DIR$/.idea/modules/elasticsearch-analysis-okt_main.iml" group="elasticsearch-analysis-okt" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/elasticsearch-analysis-okt_test.iml" filepath="$PROJECT_DIR$/.idea/modules/elasticsearch-analysis-okt_test.iml" group="elasticsearch-analysis-okt" />
+    </modules>
+  </component>
+</project>

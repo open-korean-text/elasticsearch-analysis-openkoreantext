@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.lucene:lucene-test-framework:6.2.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.lucene/lucene-test-framework/6.2.0/f5026be3983acfb40d4092dbfbc015ec6e6addab/lucene-test-framework-6.2.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.lucene/lucene-test-framework/6.2.0/134c957d72a432a6cdb045d01119ea091cb0090f/lucene-test-framework-6.2.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

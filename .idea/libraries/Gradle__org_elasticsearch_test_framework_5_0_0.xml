@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.elasticsearch.test:framework:5.0.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.elasticsearch.test/framework/5.0.0/6bd6b0c4ce7942d5310337b911d3db9224363e6c/framework-5.0.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.elasticsearch.test/framework/5.0.0/8511f744583084b543a74ed669cf8d8e8e2e051/framework-5.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

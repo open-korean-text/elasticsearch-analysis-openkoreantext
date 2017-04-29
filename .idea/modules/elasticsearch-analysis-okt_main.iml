@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id="elasticsearch-analysis-okt:main" external.linked.project.path="$MODULE_DIR$/../.." external.root.project.path="$MODULE_DIR$/../.." external.system.id="GRADLE" external.system.module.group="org.openkoreantext" external.system.module.type="sourceSet" external.system.module.version="1.0" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
+    <output url="file://$MODULE_DIR$/../../build/classes/main" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../src/main">
+      <sourceFolder url="file://$MODULE_DIR$/../../src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../src/main/resources" type="java-resource" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Gradle: org.openkoreantext:open-korean-text:1.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.scala-lang:scala-library:2.12.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.twitter:twitter-text:1.11.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.apache.lucene:lucene-suggest:6.2.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.apache.lucene:lucene-grouping:6.2.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.hdrhistogram:HdrHistogram:2.1.6" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: net.java.dev.jna:jna:4.2.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:2.8.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.apache.lucene:lucene-queries:6.2.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.fasterxml.jackson.dataformat:jackson-dataformat-smile:2.8.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.elasticsearch:securesm:1.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: joda-time:joda-time:2.9.4" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: net.sf.jopt-simple:jopt-simple:5.0.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.yaml:snakeyaml:1.15" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.apache.lucene:lucene-core:6.2.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.apache.lucene:lucene-join:6.2.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.apache.lucene:lucene-analyzers-common:6.2.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.apache.lucene:lucene-backward-codecs:6.2.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.apache.lucene:lucene-highlighter:6.2.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.apache.lucene:lucene-queryparser:6.2.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.apache.lucene:lucene-sandbox:6.2.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.apache.lucene:lucene-spatial:6.2.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.8.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.carrotsearch:hppc:0.7.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.8.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.joda:joda-convert:1.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.tdunning:t-digest:3.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.elasticsearch:elasticsearch:5.0.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.apache.lucene:lucene-spatial-extras:6.2.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.apache.lucene:lucene-spatial3d:6.2.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.apache.lucene:lucene-misc:6.2.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.apache.lucene:lucene-memory:6.2.0" level="project" />
+  </component>
+</module>

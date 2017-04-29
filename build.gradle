@@ -1,0 +1,41 @@
+group 'org.openkoreantext'
+version '1.0'
+
+apply plugin: 'java'
+apply plugin: 'java-library-distribution'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+distributions {
+    main {
+        baseName = rootProject.name
+        contents {
+            from { 'src/main/resources/' }
+        }
+    }
+}
+
+ext {
+    elasticsearchVersion = '5.0.0'
+    openKoreanTextVersion = '1.1'
+}
+
+test {
+    // ISSUE: https://discuss.elastic.co/t/elasticsearch-5-1-1-simple-integration-test-hangs-running-gradle-test/70485/2
+    jvmArgs '-Dtests.security.manager=false'
+}
+
+dependencies {
+    compile group: 'org.openkoreantext', name: 'open-korean-text', version: openKoreanTextVersion
+
+    compileOnly group: 'org.elasticsearch', name: 'elasticsearch', version: elasticsearchVersion
+
+    testCompile group: 'org.elasticsearch.test', name: 'framework', version: elasticsearchVersion
+    testCompile group: 'net.java.dev.jna', name: 'jna', version: '4.1.0'
+    testCompile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.7'
+    testCompile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.7'
+}

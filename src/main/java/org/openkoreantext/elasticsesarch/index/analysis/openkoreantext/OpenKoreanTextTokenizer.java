@@ -63,9 +63,6 @@ public class OpenKoreanTextTokenizer extends Tokenizer {
         clearAttributes();
 
         if (this.isInputRead == false) {
-            System.out.println("inc: " + this.enableNormalize);
-            System.out.println("inc: " + this.enableStemmer);
-
 
             this.isInputRead = true;
             CharSequence text = readText();
@@ -116,7 +113,6 @@ public class OpenKoreanTextTokenizer extends Tokenizer {
         charTermAttribute.append(token.getText());
         offsetAttribute.setOffset(token.getOffset(), token.getOffset() + token.getLength());
         typeAttribute.setType(token.getPos().toString());
-
     }
 
     /**
@@ -153,32 +149,11 @@ public class OpenKoreanTextTokenizer extends Tokenizer {
     /*
      * (non-Javadoc)
      *
-     * @see org.apache.lucene.analysis.Tokenizer#close()
-     */
-    @Override
-    public void close() throws IOException {
-        super.close();
-    }
-
-    /*
-     * (non-Javadoc)
-     *
      * @see org.apache.lucene.analysis.Tokenizer#reset()
      */
     @Override
     public void reset() throws IOException {
         super.reset();
-
         initializeState();
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see org.apache.lucene.analysis.TokenStream#end()
-     */
-    @Override
-    public void end() throws IOException {
-        super.end();
     }
 }

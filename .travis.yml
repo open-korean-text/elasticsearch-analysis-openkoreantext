@@ -6,6 +6,8 @@ jdk:
 env:
   - JAVA_OPTS="-Xmx512m"
 
+sudo: false
+
 before_script:
   - sudo service mysql stop || true
   - sudo service memcached stop || true

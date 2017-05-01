@@ -5,155 +5,106 @@ import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.analysis.tokenattributes.TypeAttribute;
 import org.apache.lucene.util.AttributeFactory;
-import org.openkoreantext.processor.KoreanPosJava;
-import org.openkoreantext.processor.KoreanTokenJava;
 import org.openkoreantext.processor.OpenKoreanTextProcessor;
-import org.openkoreantext.processor.OpenKoreanTextProcessorJava;
-import org.openkoreantext.processor.phrase_extractor.KoreanPhraseExtractor.KoreanPhrase;
 import org.openkoreantext.processor.tokenizer.KoreanTokenizer.KoreanToken;
 import scala.collection.JavaConversions;
 import scala.collection.Seq;
 
 import java.io.IOException;
-import java.util.LinkedList;
 import java.util.List;
 
 public class OpenKoreanTextTokenizer extends Tokenizer {
-    /** whether input stream was read as a string. */
+    private static final int READER_BUFFER_SIZE = 2048;
+
     private boolean isInputRead = false;
 
-    /** current index of token buffers. */
     private int tokenIndex = 0;
 
-    /** token buffers. */
-    List<KoreanTokenJava> tokenBuffer = null;
+    private List<KoreanToken> tokens = null;
 
-    /** whether to normalize text before tokenization. */
-    private boolean enableNormalize = true;
-
-    /** whether to stem text before tokenization. */
-    private boolean enableStemmer = true;
-
-    /** whtere to enable phrase parsing. */
-    private boolean enablePhrase = false;
+    private boolean normalization = true;
 
     private CharTermAttribute charTermAttribute = null;
+
     private OffsetAttribute offsetAttribute = null;
+
     private TypeAttribute typeAttribute = null;
 
     public OpenKoreanTextTokenizer() {
-        this(true, true, false);
+        this(true);
     }
 
-    public OpenKoreanTextTokenizer(boolean enableNormalize, boolean enableStemmer, boolean enablePhrase) {
+    public OpenKoreanTextTokenizer(boolean normalization) {
         super(AttributeFactory.DEFAULT_ATTRIBUTE_FACTORY);
-
-        this.enableNormalize = enableNormalize;
-        this.enableStemmer = enableStemmer;
-        this.enablePhrase = enablePhrase;
-
+        this.normalization = normalization;
         initAttributes();
     }
 
-    /* (non-Javadoc)
-     * @see org.apache.lucene.analysis.TokenStream#incrementToken()
-     */
     @Override
     public final boolean incrementToken() throws IOException {
         clearAttributes();
 
         if (this.isInputRead == false) {
-
             this.isInputRead = true;
             CharSequence text = readText();
+
+            if (this.normalization)
+                text =  OpenKoreanTextProcessor.normalize(text.toString());
+
             Seq<KoreanToken> tokens = OpenKoreanTextProcessor.tokenize(text);
-
-            if ( this.enableStemmer ) {
-                tokens  = OpenKoreanTextProcessor.stem(tokens);
-            }
-
-            if ( this.enablePhrase ) {
-                Seq<KoreanPhrase> phraseSeq = OpenKoreanTextProcessor.extractPhrases(tokens, true, true);
-
-                this.tokenBuffer = new LinkedList<KoreanTokenJava>();
-
-                for(KoreanPhrase phrase : JavaConversions.seqAsJavaList(phraseSeq)) {
-                    this.tokenBuffer.add(new KoreanTokenJava(phrase.text(), KoreanPosJava.valueOf(phrase.pos().toString()), phrase.offset(), phrase.length(), false));
-                }
-            } else {
-                this.tokenBuffer = OpenKoreanTextProcessorJava.tokensToJavaKoreanTokenList(tokens);
-            }
+            this.tokens = JavaConversions.seqAsJavaList(tokens);
         }
 
-        if (this.tokenBuffer == null || this.tokenBuffer.isEmpty() || tokenIndex >= this.tokenBuffer.size()) {
+        if (this.tokens == null || this.tokens.isEmpty() || tokenIndex >= this.tokens.size()) {
             return false;
         }
-
-        setAttributes(this.tokenBuffer.get(tokenIndex++));
-
+        setAttributes(this.tokens.get(tokenIndex++));
         return true;
     }
 
-    /**
-     * Add attributes
-     *
-     */
+    @Override
+    public void reset() throws IOException {
+        super.reset();
+        initializeState();
+    }
+
+    public CharTermAttribute getCharTermAttribute(){
+        return this.charTermAttribute;
+    }
+
+    public OffsetAttribute getOffsetAttribute(){
+        return this.offsetAttribute;
+    }
+
+    public TypeAttribute getTypeAttribute(){
+        return this.typeAttribute;
+    }
+
     private void initAttributes() {
         this.charTermAttribute = addAttribute(CharTermAttribute.class);
         this.offsetAttribute = addAttribute(OffsetAttribute.class);
         this.typeAttribute = addAttribute(TypeAttribute.class);
     }
 
-    /**
-     * Set attributes
-     *
-     * @param token
-     */
-    private void setAttributes(KoreanTokenJava token) {
-        charTermAttribute.append(token.getText());
-        offsetAttribute.setOffset(token.getOffset(), token.getOffset() + token.getLength());
-        typeAttribute.setType(token.getPos().toString());
+    private void setAttributes(KoreanToken token) {
+        charTermAttribute.append(token.text());
+        offsetAttribute.setOffset(token.offset(), token.offset() + token.length());
+        typeAttribute.setType(token.pos().toString());
     }
 
-    /**
-     * Read string from input reader.
-     *
-     * @return
-     * @throws IOException
-     */
     private CharSequence readText() throws IOException {
         StringBuilder text = new StringBuilder();
-        char[] tmp = new char[1024];
+        char[] tmp = new char[READER_BUFFER_SIZE];
         int len = -1;
         while ((len = input.read(tmp)) != -1) {
             text.append(new String(tmp, 0, len));
         }
-
-        if ( this.enableNormalize ) {
-            return OpenKoreanTextProcessor.normalize(text.toString());
-        } else {
-            return text.toString();
-        }
-
+        return text.toString();
     }
 
-    /**
-     * Initailze states.
-     */
     private void initializeState() {
         this.isInputRead = false;
         this.tokenIndex = 0;
-        this.tokenBuffer = null;
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see org.apache.lucene.analysis.Tokenizer#reset()
-     */
-    @Override
-    public void reset() throws IOException {
-        super.reset();
-        initializeState();
+        this.tokens = null;
     }
 }

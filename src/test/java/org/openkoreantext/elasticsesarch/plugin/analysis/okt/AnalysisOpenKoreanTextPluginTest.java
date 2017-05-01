@@ -6,14 +6,15 @@ import org.elasticsearch.plugins.Plugin;
 import org.elasticsearch.plugins.PluginInfo;
 import org.elasticsearch.test.ESIntegTestCase;
 import org.junit.Assert;
+import org.openkoreantext.elasticsesarch.plugin.analysis.openkoreantext.AnalysisOpenKoreanTextPlugin;
 
 import java.util.Collection;
 import java.util.Collections;
 
-public class AnalysisOKTPluginTest extends ESIntegTestCase {
+public class AnalysisOpenKoreanTextPluginTest extends ESIntegTestCase {
     @Override
     protected Collection<Class<? extends Plugin>> nodePlugins() {
-        return Collections.singleton(AnalysisOKTPlugin.class);
+        return Collections.singleton(AnalysisOpenKoreanTextPlugin.class);
     }
 
     public void testPluginIsLoaded() {
@@ -21,7 +22,7 @@ public class AnalysisOKTPluginTest extends ESIntegTestCase {
         for (NodeInfo node : response.getNodes()) {
             boolean founded = false;
             for (PluginInfo pluginInfo : node.getPlugins().getPluginInfos()) {
-                if(pluginInfo.getName().equals(AnalysisOKTPlugin.class.getName())){
+                if(pluginInfo.getName().equals(AnalysisOpenKoreanTextPlugin.class.getName())){
                     founded = true;
                 }
             }

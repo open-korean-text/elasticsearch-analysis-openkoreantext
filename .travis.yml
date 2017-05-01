@@ -3,6 +3,9 @@ language: java
 jdk:
   - oraclejdk8
 
+env:
+  - JAVA_OPTS="-Xmx512m"
+
 before_script:
   - sudo service mysql stop || true
   - sudo service memcached stop || true

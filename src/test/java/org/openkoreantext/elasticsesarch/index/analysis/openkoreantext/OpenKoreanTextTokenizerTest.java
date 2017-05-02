@@ -71,7 +71,6 @@ public class OpenKoreanTextTokenizerTest {
             actualEndOffsets.add(tokenizer.getOffsetAttribute().endOffset());
         }
         tokenizer.end();
-
         Assert.assertArrayEquals(expectedCharTerms, actualCharTerms.toArray());
         Assert.assertArrayEquals(expectedTypes, actualTypes.toArray());
         Assert.assertArrayEquals(expectedStartOffsets, actualStartOffsets.toArray());

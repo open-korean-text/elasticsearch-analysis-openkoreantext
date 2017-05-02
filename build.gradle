@@ -2,7 +2,6 @@ group 'org.openkoreantext'
 version '1.0'
 
 apply plugin: 'java'
-apply plugin: 'java-library-distribution'
 
 sourceCompatibility = 1.8
 
@@ -10,12 +9,9 @@ repositories {
     mavenCentral()
 }
 
-distributions {
-    main {
-        baseName = rootProject.name
-        contents {
-            from { 'src/main/resources/' }
-        }
+configurations {
+    distJars {
+        extendsFrom runtime
     }
 }
 
@@ -38,6 +34,28 @@ dependencies {
     testCompile group: 'net.java.dev.jna', name: 'jna', version: '4.1.0'
     testCompile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.7'
     testCompile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.7'
+}
+
+task makePluginDescriptor(type: Copy) {
+    from 'src/main/resources'
+    into 'build/tmp/plugin'
+    expand([
+        'descriptor': [
+            'name': 'elasticserach-analysis-openkoreantext',
+            'classname': 'org.openkoreantext.elasticsesarch.plugin.analysis.openkoreantext.AnalysisOpenKoreanTextPlugin',
+            'description': 'Korean analysis plugin integrates open-korean-text module into elasticsearch.',
+            'version': '1.0.0',
+            'javaVersion': sourceCompatibility,
+            'elasticsearchVersion' : '5.0.0'
+        ]
+    ])
+}
+
+task buildPluginZip(type: Zip, dependsOn: [':jar', ':makePluginDescriptor']) {
+    from configurations.distJars
+    from 'build/tmp/plugin'
+    into 'elasticsearch'
+    classifier = 'plugin'
 }
 
 

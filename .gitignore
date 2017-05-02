@@ -4,6 +4,7 @@
 *.ipr
 *.iws
 .idea/
+out/
 
 # Eclipse project files
 .classpath

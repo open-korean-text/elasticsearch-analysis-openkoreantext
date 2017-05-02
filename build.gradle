@@ -53,10 +53,13 @@ task makePluginDescriptor(type: Copy) {
 
 task buildPluginZip(type: Zip, dependsOn: [':jar', ':makePluginDescriptor']) {
     from configurations.distJars
+    from jar.archivePath
     from 'build/tmp/plugin'
     into 'elasticsearch'
     classifier = 'plugin'
 }
+
+build.finalizedBy(buildPluginZip)
 
 
 task wrapper(type: Wrapper) {

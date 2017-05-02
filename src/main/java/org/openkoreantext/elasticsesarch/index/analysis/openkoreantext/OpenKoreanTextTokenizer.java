@@ -22,8 +22,6 @@ public class OpenKoreanTextTokenizer extends Tokenizer {
 
     private List<KoreanToken> tokens = null;
 
-    private boolean normalization = true;
-
     private CharTermAttribute charTermAttribute = null;
 
     private OffsetAttribute offsetAttribute = null;
@@ -31,12 +29,7 @@ public class OpenKoreanTextTokenizer extends Tokenizer {
     private TypeAttribute typeAttribute = null;
 
     public OpenKoreanTextTokenizer() {
-        this(true);
-    }
-
-    public OpenKoreanTextTokenizer(boolean normalization) {
         super(AttributeFactory.DEFAULT_ATTRIBUTE_FACTORY);
-        this.normalization = normalization;
         initAttributes();
     }
 
@@ -44,13 +37,9 @@ public class OpenKoreanTextTokenizer extends Tokenizer {
     public final boolean incrementToken() throws IOException {
         clearAttributes();
 
-        if (this.isInputRead == false) {
+        if (!this.isInputRead) {
             this.isInputRead = true;
             CharSequence text = readText();
-
-            if (this.normalization)
-                text =  OpenKoreanTextProcessor.normalize(text.toString());
-
             Seq<KoreanToken> tokens = OpenKoreanTextProcessor.tokenize(text);
             this.tokens = JavaConversions.seqAsJavaList(tokens);
         }

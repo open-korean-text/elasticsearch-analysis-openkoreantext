@@ -1,4 +1,4 @@
-package org.openkoreantext.elasticsesarch.plugin.analysis.openkoreantext;
+package org.elasticsearch.plugin.analysis.openkoreantext;
 
 import org.elasticsearch.index.analysis.CharFilterFactory;
 import org.elasticsearch.index.analysis.TokenFilterFactory;
@@ -6,9 +6,8 @@ import org.elasticsearch.index.analysis.TokenizerFactory;
 import org.elasticsearch.indices.analysis.AnalysisModule;
 import org.elasticsearch.plugins.AnalysisPlugin;
 import org.elasticsearch.plugins.Plugin;
-import org.openkoreantext.elasticsesarch.index.analysis.openkoreantext.OpenKoreanTextNormalizerFactory;
-import org.openkoreantext.elasticsesarch.index.analysis.openkoreantext.OpenKoreanTextStemmerFactory;
-import org.openkoreantext.elasticsesarch.index.analysis.openkoreantext.OpenKoreanTextTokenizerFactory;
+import org.elasticsearch.index.analysis.OpenKoreanTextNormalizerFactory;
+import org.elasticsearch.index.analysis.OpenKoreanTextTokenizerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,7 +31,7 @@ public class AnalysisOpenKoreanTextPlugin extends Plugin implements AnalysisPlug
     @Override
     public Map<String, AnalysisModule.AnalysisProvider<TokenFilterFactory>> getTokenFilters() {
         Map<String, AnalysisModule.AnalysisProvider<TokenFilterFactory>> tokenFilters = new HashMap<>();
-        tokenFilters.put("openkoreantext-stemmer", OpenKoreanTextStemmerFactory::new);
+        tokenFilters.put("openkoreantext-stemmer", OpenKoreanTextNormalizerFactory.OpenKoreanTextStemmerFactory::new);
         return tokenFilters;
     }
 }

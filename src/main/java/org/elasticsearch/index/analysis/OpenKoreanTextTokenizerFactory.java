@@ -1,10 +1,10 @@
-package org.openkoreantext.elasticsesarch.index.analysis.openkoreantext;
+package org.elasticsearch.index.analysis;
 
 import org.apache.lucene.analysis.Tokenizer;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.env.Environment;
 import org.elasticsearch.index.IndexSettings;
-import org.elasticsearch.index.analysis.AbstractTokenizerFactory;
+import org.apache.lucene.analysis.ko.OpenKoreanTextTokenizer;
 
 public class OpenKoreanTextTokenizerFactory extends AbstractTokenizerFactory {
 

@@ -1,4 +1,4 @@
-package org.openkoreantext.elasticsesarch.index.analysis.openkoreantext;
+package org.apache.lucene.analysis.ko;
 
 import org.apache.lucene.analysis.TokenFilter;
 import org.apache.lucene.analysis.TokenStream;

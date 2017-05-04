@@ -1,7 +1,8 @@
-package org.openkoreantext.elasticsesarch.plugin.analysis.openkoreantext;
+package org.elasticsesarch.plugin.analysis.openkoreantext;
 
 import org.elasticsearch.action.admin.cluster.node.info.NodeInfo;
 import org.elasticsearch.action.admin.cluster.node.info.NodesInfoResponse;
+import org.elasticsearch.plugin.analysis.openkoreantext.AnalysisOpenKoreanTextPlugin;
 import org.elasticsearch.plugins.Plugin;
 import org.elasticsearch.plugins.PluginInfo;
 import org.elasticsearch.test.ESIntegTestCase;

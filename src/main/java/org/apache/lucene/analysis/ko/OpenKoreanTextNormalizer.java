@@ -1,4 +1,4 @@
-package org.openkoreantext.elasticsesarch.index.analysis.openkoreantext;
+package org.apache.lucene.analysis.ko;
 
 import org.apache.lucene.analysis.charfilter.BaseCharFilter;
 import org.openkoreantext.processor.OpenKoreanTextProcessor;
@@ -9,13 +9,13 @@ import java.io.Reader;
 public class OpenKoreanTextNormalizer extends BaseCharFilter {
     private static final int READER_BUFFER_SIZE = 2048;
 
-    private boolean isInputRead;
+    private boolean preparedToRead;
     private char[] inputText;
     private int cursor;
 
     public OpenKoreanTextNormalizer(Reader in) {
         super(in);
-        initAttrs();
+        initAttributes();
     }
 
     @Override
@@ -24,13 +24,13 @@ public class OpenKoreanTextNormalizer extends BaseCharFilter {
         if (off >= cbuf.length) throw new IllegalArgumentException("off >= cbuf.length");
         if (len <= 0) throw new IllegalArgumentException("len <= 0");
 
-        if (!this.isInputRead) {
-            startAttrs();
+        if (!this.preparedToRead) {
+            prepareToRead();
         }
 
         int copyLen = this.inputText.length - cursor;
         if(copyLen < 1){
-            initAttrs();
+            initAttributes();
             return -1;
         }
 
@@ -40,14 +40,14 @@ public class OpenKoreanTextNormalizer extends BaseCharFilter {
         return copyLen;
     }
 
-    private void initAttrs(){
-        this.isInputRead = false;
+    private void initAttributes(){
+        this.preparedToRead = false;
         this.inputText = null;
         this.cursor = -1;
     }
 
-    private void startAttrs() throws IOException {
-        this.isInputRead = true;
+    private void prepareToRead() throws IOException {
+        this.preparedToRead = true;
         this.inputText = normalizeInput().toCharArray();
         this.cursor = 0;
     }

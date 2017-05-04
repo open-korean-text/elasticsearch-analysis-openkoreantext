@@ -1,10 +1,11 @@
-package org.openkoreantext.elasticsesarch.index.analysis.openkoreantext;
+package org.elasticsearch.index.analysis;
 
+import org.apache.lucene.analysis.TokenStream;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.env.Environment;
 import org.elasticsearch.index.IndexSettings;
-import org.elasticsearch.index.analysis.AbstractCharFilterFactory;
-import org.elasticsearch.index.analysis.MultiTermAwareComponent;
+import org.apache.lucene.analysis.ko.OpenKoreanTextNormalizer;
+import org.apache.lucene.analysis.ko.OpenKoreanTextStemmer;
 
 import java.io.Reader;
 
@@ -22,5 +23,16 @@ public class OpenKoreanTextNormalizerFactory extends AbstractCharFilterFactory i
     @Override
     public Object getMultiTermComponent() {
         return this;
+    }
+
+    public static class OpenKoreanTextStemmerFactory extends AbstractTokenFilterFactory {
+        public OpenKoreanTextStemmerFactory(IndexSettings indexSettings, Environment env, String name, Settings settings) {
+            super(indexSettings, name, settings);
+        }
+
+        @Override
+        public TokenStream create(TokenStream tokenStream) {
+            return new OpenKoreanTextStemmer(tokenStream);
+        }
     }
 }

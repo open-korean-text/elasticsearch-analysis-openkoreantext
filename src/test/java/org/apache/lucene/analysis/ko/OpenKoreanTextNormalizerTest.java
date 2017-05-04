@@ -1,4 +1,4 @@
-package org.openkoreantext.elasticsesarch.index.analysis.openkoreantext;
+package org.apache.lucene.analysis.ko;
 
 import org.apache.lucene.analysis.CharFilter;
 import org.elasticsearch.common.settings.Settings;
@@ -8,7 +8,7 @@ import org.elasticsearch.index.analysis.CharFilterFactory;
 import org.elasticsearch.test.ESTestCase;
 import org.junit.Assert;
 import org.junit.Test;
-import org.openkoreantext.elasticsesarch.plugin.analysis.openkoreantext.AnalysisOpenKoreanTextPlugin;
+import org.elasticsearch.plugin.analysis.openkoreantext.AnalysisOpenKoreanTextPlugin;
 
 import java.io.StringReader;
 

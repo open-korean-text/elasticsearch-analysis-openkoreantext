@@ -42,7 +42,7 @@ task makePluginDescriptor(type: Copy) {
     expand([
         'descriptor': [
             'name': 'elasticserach-analysis-openkoreantext',
-            'classname': 'org.openkoreantext.elasticsesarch.plugin.analysis.openkoreantext.AnalysisOpenKoreanTextPlugin',
+            'classname': 'org.elasticsesarch.plugin.analysis.openkoreantext.AnalysisOpenKoreanTextPlugin',
             'description': 'Korean analysis plugin integrates open-korean-text module into elasticsearch.',
             'version': '1.0.0',
             'javaVersion': sourceCompatibility,

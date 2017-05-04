@@ -1,4 +1,4 @@
-package org.openkoreantext.elasticsesarch.index.analysis.openkoreantext;
+package org.apache.lucene.analysis.ko;
 
 import org.junit.Test;
 

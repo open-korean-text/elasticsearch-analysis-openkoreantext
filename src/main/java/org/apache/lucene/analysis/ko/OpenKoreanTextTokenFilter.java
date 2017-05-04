@@ -27,7 +27,7 @@ public abstract class OpenKoreanTextTokenFilter extends TokenFilter {
     }
 
     @Override
-    public boolean incrementToken() throws IOException {
+    public final boolean incrementToken() throws IOException {
         clearAttributes();
 
         if(!(input instanceof OpenKoreanTextTokenizer)) {

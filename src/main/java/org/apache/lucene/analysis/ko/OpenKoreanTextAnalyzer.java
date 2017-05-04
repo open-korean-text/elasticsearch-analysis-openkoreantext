@@ -18,9 +18,7 @@ public class OpenKoreanTextAnalyzer extends StopwordAnalyzerBase {
         List<String> stopWords = Arrays.asList(
                 "a", "an", "and", "are", "as", "at", "be", "but", "by",
                 "for", "if", "in", "into", "is", "it", "no", "not", "of", "on", "or", "such", "that", "the",
-                "their", "then", "there", "these", "they", "this", "to", "was", "will", "with",
-                "이", "그", "저", "요", "것", "수", "등", "들", "및", "에", "에서", "그리고", "그래서", "또", "또는", "꼭", "잘",
-                "?", "!", ";", ".", "-");
+                "their", "then", "there", "these", "they", "this", "to", "was", "will", "with");
 
         STOP_WORD_SET = CharArraySet.unmodifiableSet(new CharArraySet(stopWords.size(), false));
     }
@@ -33,10 +31,11 @@ public class OpenKoreanTextAnalyzer extends StopwordAnalyzerBase {
     protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer tokenizer = new OpenKoreanTextTokenizer();
 
-        TokenStream tokenStream = new LowerCaseFilter(tokenizer);
+        TokenStream tokenStream = new OpenKoreanTextStemmer(tokenizer);
+        tokenStream = new OpenKoreanTextRedundantFilter(tokenStream);
         tokenStream = new ClassicFilter(tokenStream);
         tokenStream = new LengthFilter(tokenStream, 0, MAX_TOKEN_LENGTH);
-        tokenStream = new OpenKoreanTextStemmer(tokenStream);
+        tokenStream = new LowerCaseFilter(tokenStream);
 
         return new TokenStreamComponents(tokenizer, tokenStream);
     }

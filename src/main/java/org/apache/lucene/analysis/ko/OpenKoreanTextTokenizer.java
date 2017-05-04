@@ -11,14 +11,22 @@ import scala.collection.JavaConverters;
 import scala.collection.Seq;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-public class OpenKoreanTextTokenizer extends Tokenizer {
+public class OpenKoreanTextTokenizer extends Tokenizer implements KoreanTokenPrepareable {
+
     private static final int READER_BUFFER_SIZE = 1024;
 
-    private Seq<KoreanToken> tokens = null;
+    private final static Set<String> stopTypes;
 
-    private List<KoreanToken> tokensForInc = null;
+    static {
+        stopTypes = new HashSet<>();
+        stopTypes.add("Space");
+    }
+
+    private List<KoreanToken> preparedTokens = null;
 
     private final CharTermAttribute charTermAttribute = addAttribute(CharTermAttribute.class);
 
@@ -36,26 +44,22 @@ public class OpenKoreanTextTokenizer extends Tokenizer {
     public final boolean incrementToken() throws IOException {
         clearAttributes();
 
-        if (this.tokensForInc == null) {
-            prepareTokens();
-            this.tokensForInc = JavaConverters.seqAsJavaList(tokens);
+        if (this.preparedTokens == null) {
+            this.preparedTokens = JavaConverters.seqAsJavaList(prepareKoreanTokens());
         }
 
-        if (this.tokensForInc == null || this.tokensForInc.isEmpty() || tokenIndex >= this.tokensForInc.size()) {
+        if (this.preparedTokens == null || this.preparedTokens.isEmpty() || tokenIndex >= this.preparedTokens.size()) {
             return false;
         }
 
-        setAttributes(this.tokensForInc.get(tokenIndex++));
+        setAttributes(this.preparedTokens.get(tokenIndex++));
         return true;
     }
 
-    public void prepareTokens() throws IOException {
+    @Override
+    public Seq<KoreanToken> prepareKoreanTokens() throws IOException {
         CharSequence text = readText();
-        this.tokens = OpenKoreanTextProcessor.tokenize(text);
-    }
-
-    public Seq<KoreanToken> getTokens(){
-        return this.tokens;
+        return OpenKoreanTextProcessor.tokenize(text);
     }
 
     @Override
@@ -82,7 +86,6 @@ public class OpenKoreanTextTokenizer extends Tokenizer {
 
     private void initializeState() {
         this.tokenIndex = 0;
-        this.tokens = null;
-        this.tokensForInc = null;
+        this.preparedTokens = null;
     }
 }

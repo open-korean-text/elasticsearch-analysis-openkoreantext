@@ -13,14 +13,14 @@ import java.util.List;
 
 import static org.openkoreantext.processor.tokenizer.KoreanTokenizer.KoreanToken;
 
-public abstract class OpenKoreanTextTokenFilter extends TokenFilter {
+public abstract class OpenKoreanTextTokenFilter extends TokenFilter implements KoreanTokenPrepareable {
 
     private final CharTermAttribute charTermAttribute = addAttribute(CharTermAttribute.class);
     private final OffsetAttribute offsetAttribute = addAttribute(OffsetAttribute.class);
     private final TypeAttribute typeAttribute = addAttribute(TypeAttribute.class);
 
     protected int tokenIndex = 0;
-    protected List<KoreanToken> tokensForInc = null;
+    protected List<KoreanToken> preparedTokens = null;
 
     public OpenKoreanTextTokenFilter(TokenStream input) {
         super(input);
@@ -30,22 +30,25 @@ public abstract class OpenKoreanTextTokenFilter extends TokenFilter {
     public final boolean incrementToken() throws IOException {
         clearAttributes();
 
-        if(!(input instanceof OpenKoreanTextTokenizer)) {
-            return incrementToken();
-        } else {
-            if(tokensForInc == null) {
-                OpenKoreanTextTokenizer tokenizer = (OpenKoreanTextTokenizer) input;
-                tokenizer.prepareTokens();
-                this.tokensForInc = JavaConverters.seqAsJavaList(perform(tokenizer.getTokens()));
+        if(input instanceof KoreanTokenPrepareable) {
+            if(preparedTokens == null) {
+                this.preparedTokens = JavaConverters.seqAsJavaList(prepareKoreanTokens());
             }
 
-            if (this.tokensForInc == null || this.tokensForInc.isEmpty() || tokenIndex >= this.tokensForInc.size()) {
+            if (this.preparedTokens == null || this.preparedTokens.isEmpty() || tokenIndex >= this.preparedTokens.size()) {
                 return false;
             }
 
-            setAttributes(this.tokensForInc.get(tokenIndex++));
+            setAttributes(this.preparedTokens.get(tokenIndex++));
             return true;
+        } else {
+            return input.incrementToken();
         }
+    }
+
+    @Override
+    public Seq<KoreanToken> prepareKoreanTokens() throws IOException {
+        return perform(((KoreanTokenPrepareable) input).prepareKoreanTokens());
     }
 
     @Override
@@ -64,6 +67,6 @@ public abstract class OpenKoreanTextTokenFilter extends TokenFilter {
 
     private void initializeState() {
         this.tokenIndex = 0;
-        this.tokensForInc = null;
+        this.preparedTokens = null;
     }
 }

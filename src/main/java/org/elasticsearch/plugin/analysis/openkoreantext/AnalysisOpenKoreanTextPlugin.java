@@ -33,8 +33,10 @@ public class AnalysisOpenKoreanTextPlugin extends Plugin implements AnalysisPlug
     @Override
     public Map<String, AnalysisModule.AnalysisProvider<TokenFilterFactory>> getTokenFilters() {
         Map<String, AnalysisModule.AnalysisProvider<TokenFilterFactory>> tokenFilters = new HashMap<>();
-        tokenFilters.put("openkoreantext-stemmer", OpenKoreanTextNormalizerFactory.OpenKoreanTextStemmerFactory::new);
+        tokenFilters.put("openkoreantext-stemmer", OpenKoreanTextStemmerFactory::new);
+        tokenFilters.put("openkoreantext-redundant-filter", OpenKoreanTextRedundantFilterFactory::new);
         tokenFilters.put("openkoreantext-phrase-extractor", OpenKoreanTextPhraseExtractorFactory::new);
+
         return tokenFilters;
     }
 }

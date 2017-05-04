@@ -1,6 +1,5 @@
 package org.openkoreantext.elasticsesarch.index.analysis.openkoreantext;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -21,26 +20,11 @@ public class OpenKoreanTextTokenizerTest {
 
         String[] expectedCharTerms = new String[]{"한국어", "를", " ", "처리하는", " ", "예시", "입니", "다", "ㅋㅋ"};
         String[] expectedTypes = new String[]{"Noun", "Josa", "Space", "Verb", "Space", "Noun", "Adjective", "Eomi", "KoreanParticle"};
-        Integer[] expectedStartOffsets = new Integer[]{0, 3, 4, 5, 9, 10, 12, 14, 15};
-        Integer[] expectedEndOffsets = new Integer[]{3, 4, 5, 9, 10, 12, 14, 15, 17};
-
-        List<String> actualCharTerms = new ArrayList<>();
-        List<String> actualTypes = new ArrayList<>();
-        List<Integer> actualStartOffsets = new ArrayList<>();
-        List<Integer> actualEndOffsets = new ArrayList<>();
+        int[] expectedStartOffsets = new int[]{0, 3, 4, 5, 9, 10, 12, 14, 15};
+        int[] expectedEndOffsets = new int[]{3, 4, 5, 9, 10, 12, 14, 15, 17};
 
         tokenizer.reset();
-        while (tokenizer.incrementToken() == true){
-            actualCharTerms.add(tokenizer.getCharTermAttribute().toString());
-            actualTypes.add(tokenizer.getTypeAttribute().type());
-            actualStartOffsets.add(tokenizer.getOffsetAttribute().startOffset());
-            actualEndOffsets.add(tokenizer.getOffsetAttribute().endOffset());
-        }
+        TokenStreamAssertions.assertTokenStream(tokenizer, expectedCharTerms, expectedTypes, expectedStartOffsets, expectedEndOffsets);
         tokenizer.end();
-
-        Assert.assertArrayEquals(expectedCharTerms, actualCharTerms.toArray());
-        Assert.assertArrayEquals(expectedTypes, actualTypes.toArray());
-        Assert.assertArrayEquals(expectedStartOffsets, actualStartOffsets.toArray());
-        Assert.assertArrayEquals(expectedEndOffsets, actualEndOffsets.toArray());
     }
 }

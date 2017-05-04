@@ -7,78 +7,61 @@ import org.apache.lucene.analysis.tokenattributes.TypeAttribute;
 import org.apache.lucene.util.AttributeFactory;
 import org.openkoreantext.processor.OpenKoreanTextProcessor;
 import org.openkoreantext.processor.tokenizer.KoreanTokenizer.KoreanToken;
-import scala.collection.JavaConversions;
+import scala.collection.JavaConverters;
 import scala.collection.Seq;
 
 import java.io.IOException;
 import java.util.List;
 
 public class OpenKoreanTextTokenizer extends Tokenizer {
-    private static final int READER_BUFFER_SIZE = 2048;
+    private static final int READER_BUFFER_SIZE = 1024;
 
-    private boolean isInputRead = false;
+    private Seq<KoreanToken> tokens = null;
+
+    private List<KoreanToken> tokensForInc = null;
+
+    private final CharTermAttribute charTermAttribute = addAttribute(CharTermAttribute.class);
+
+    private final OffsetAttribute offsetAttribute = addAttribute(OffsetAttribute.class);
+
+    private final TypeAttribute typeAttribute = addAttribute(TypeAttribute.class);
 
     private int tokenIndex = 0;
 
-    private List<KoreanToken> tokens = null;
-
-    private CharTermAttribute charTermAttribute = null;
-
-    private OffsetAttribute offsetAttribute = null;
-
-    private TypeAttribute typeAttribute = null;
-
     public OpenKoreanTextTokenizer() {
         super(AttributeFactory.DEFAULT_ATTRIBUTE_FACTORY);
-        initAttributes();
     }
 
     @Override
     public final boolean incrementToken() throws IOException {
         clearAttributes();
 
-        if (!this.isInputRead) {
-            this.isInputRead = true;
-            CharSequence text = readText();
-            Seq<KoreanToken> tokens = OpenKoreanTextProcessor.tokenize(text);
-            this.tokens = JavaConversions.seqAsJavaList(tokens);
+        if (this.tokensForInc == null) {
+            prepareTokens();
+            this.tokensForInc = JavaConverters.seqAsJavaList(tokens);
         }
 
-        if (this.tokens == null || this.tokens.isEmpty() || tokenIndex >= this.tokens.size()) {
+        if (this.tokensForInc == null || this.tokensForInc.isEmpty() || tokenIndex >= this.tokensForInc.size()) {
             return false;
         }
-        setAttributes(this.tokens.get(tokenIndex++));
+
+        setAttributes(this.tokensForInc.get(tokenIndex++));
         return true;
+    }
+
+    public void prepareTokens() throws IOException {
+        CharSequence text = readText();
+        this.tokens = OpenKoreanTextProcessor.tokenize(text);
+    }
+
+    public Seq<KoreanToken> getTokens(){
+        return this.tokens;
     }
 
     @Override
     public void reset() throws IOException {
         super.reset();
         initializeState();
-    }
-
-    public CharTermAttribute getCharTermAttribute(){
-        return this.charTermAttribute;
-    }
-
-    public OffsetAttribute getOffsetAttribute(){
-        return this.offsetAttribute;
-    }
-
-    public TypeAttribute getTypeAttribute(){
-        return this.typeAttribute;
-    }
-
-    private void initAttributes() {
-        this.charTermAttribute = addAttribute(CharTermAttribute.class);
-        this.offsetAttribute = addAttribute(OffsetAttribute.class);
-        this.typeAttribute = addAttribute(TypeAttribute.class);
-    }
-
-    private void setAttributes(KoreanToken token) {
-        charTermAttribute.append(token.text());
-        offsetAttribute.setOffset(token.offset(), token.offset() + token.length());
-        typeAttribute.setType(token.pos().toString());
     }
 
     private CharSequence readText() throws IOException {
@@ -91,9 +74,15 @@ public class OpenKoreanTextTokenizer extends Tokenizer {
         return text.toString();
     }
 
+    private void setAttributes(KoreanToken token) {
+        charTermAttribute.append(token.text());
+        offsetAttribute.setOffset(token.offset(), token.offset() + token.length());
+        typeAttribute.setType(token.pos().toString());
+    }
+
     private void initializeState() {
-        this.isInputRead = false;
         this.tokenIndex = 0;
         this.tokens = null;
+        this.tokensForInc = null;
     }
 }

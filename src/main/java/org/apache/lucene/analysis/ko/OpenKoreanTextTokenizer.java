@@ -11,6 +11,8 @@ import scala.collection.JavaConverters;
 import scala.collection.Seq;
 
 import java.io.*;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -49,19 +51,21 @@ public class OpenKoreanTextTokenizer extends Tokenizer implements KoreanTokenPre
 
     public void addUserDictionary(String path) throws IOException {
         File file = new File(path);
+        addUserDictionary(new BufferedReader(new FileReader(file)));
+    }
 
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+    public void addUserDictionary(URL url) throws IOException {
+        URLConnection connection = url.openConnection();
+        addUserDictionary(new BufferedReader(new InputStreamReader(connection.getInputStream())));
+    }
+
+    public void addUserDictionary(BufferedReader bufferedReader) throws IOException {
         List<String> words = new ArrayList<>();
         String word;
         while ((word = bufferedReader.readLine()) != null) {
             words.add(word);
         }
-
         addUserDictionary(words);
-    }
-
-    public void addUserDictionary(String[] paths) throws IOException {
-        for(String path : paths) addUserDictionary(path);
     }
 
     @Override

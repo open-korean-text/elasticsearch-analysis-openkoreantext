@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,18 +56,34 @@ public class OpenKoreanTextTokenizerTest {
 
     @Test
     public void testUserDictionaryFromFile() throws IOException {
-        File dic = new File(getClass().getClassLoader().getResource("dictionary").getFile());
-        String path = dic.getAbsolutePath();
-
         String text = "브루클린버거는 대박맛집이다";
+        String[] expected = new String[]{"브루클린버거", "는", " ", "대박맛집", "이다"};
+
         OpenKoreanTextTokenizer tokenizer = new OpenKoreanTextTokenizer();
 
+        File dic = new File(getClass().getClassLoader().getResource("dictionary").getFile());
+        String path = dic.getAbsolutePath();
         tokenizer.addUserDictionary(path);
 
-        String[] after = new String[]{"브루클린버거", "는", " ", "대박맛집", "이다"};
         tokenizer.setReader(new StringReader(text));
         tokenizer.reset();
-        TokenStreamAssertions.assertTokenStream(tokenizer, after, null, null, null);
+        TokenStreamAssertions.assertTokenStream(tokenizer, expected, null, null, null);
+        tokenizer.end();
+    }
+
+    @Test
+    public void testUserDictionaryFromURL() throws IOException {
+        String text = "브루클린버거는 대박맛집이다";
+        String[] expected = new String[]{"브루클린버거", "는", " ", "대박맛집", "이다"};
+
+        OpenKoreanTextTokenizer tokenizer = new OpenKoreanTextTokenizer();
+
+        URL url = new URL("https://raw.githubusercontent.com/open-korean-text/elasticsearch-analysis-openkoreantext/master/src/test/resources/dictionary");
+        tokenizer.addUserDictionary(url);
+
+        tokenizer.setReader(new StringReader(text));
+        tokenizer.reset();
+        TokenStreamAssertions.assertTokenStream(tokenizer, expected, null, null, null);
         tokenizer.end();
     }
 }

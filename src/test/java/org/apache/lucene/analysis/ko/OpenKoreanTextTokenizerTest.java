@@ -2,6 +2,7 @@ package org.apache.lucene.analysis.ko;
 
 import org.junit.Test;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -11,12 +12,10 @@ public class OpenKoreanTextTokenizerTest {
 
     @Test
     public void testTokenizer() throws IOException {
-        String testQuery = "한국어를 처리하는 예시입니다ㅋㅋ";
+        String text = "한국어를 처리하는 예시입니다ㅋㅋ";
 
         OpenKoreanTextTokenizer tokenizer = new OpenKoreanTextTokenizer();
-        tokenizer.setReader(new StringReader(testQuery));
-
-        List<String> types = new ArrayList<>();
+        tokenizer.setReader(new StringReader(text));
 
         String[] expectedCharTerms = new String[]{"한국어", "를", " ", "처리하는", " ", "예시", "입니", "다", "ㅋㅋ"};
         String[] expectedTypes = new String[]{"Noun", "Josa", "Space", "Verb", "Space", "Noun", "Adjective", "Eomi", "KoreanParticle"};
@@ -25,6 +24,49 @@ public class OpenKoreanTextTokenizerTest {
 
         tokenizer.reset();
         TokenStreamAssertions.assertTokenStream(tokenizer, expectedCharTerms, expectedTypes, expectedStartOffsets, expectedEndOffsets);
+        tokenizer.end();
+    }
+
+    @Test
+    public void testAddNounsToDictionary() throws IOException {
+        String text = "브루클린버거는 대박맛집이다";
+
+        OpenKoreanTextTokenizer tokenizer = new OpenKoreanTextTokenizer();
+        tokenizer.setReader(new StringReader(text));
+
+        String[] before = new String[]{"브루클린", "버거", "는", " ", "대박", "맛집", "이다"};
+        String[] after = new String[]{"브루클린버거", "는", " ", "대박맛집", "이다"};
+
+        tokenizer.reset();
+        TokenStreamAssertions.assertTokenStream(tokenizer, before, null, null, null);
+        tokenizer.end();
+        tokenizer.close();
+
+        List<String> userDictionary = new ArrayList<>();
+        userDictionary.add("브루클린버거");
+        userDictionary.add("대박맛집");
+        tokenizer.addUserDictionary(userDictionary);
+
+        tokenizer.setReader(new StringReader(text));
+        tokenizer.reset();
+        TokenStreamAssertions.assertTokenStream(tokenizer, after, null, null, null);
+        tokenizer.end();
+    }
+
+    @Test
+    public void testUserDictionaryFromFile() throws IOException {
+        File dic = new File(getClass().getClassLoader().getResource("dictionary").getFile());
+        String path = dic.getAbsolutePath();
+
+        String text = "브루클린버거는 대박맛집이다";
+        OpenKoreanTextTokenizer tokenizer = new OpenKoreanTextTokenizer();
+
+        tokenizer.addUserDictionary(path);
+
+        String[] after = new String[]{"브루클린버거", "는", " ", "대박맛집", "이다"};
+        tokenizer.setReader(new StringReader(text));
+        tokenizer.reset();
+        TokenStreamAssertions.assertTokenStream(tokenizer, after, null, null, null);
         tokenizer.end();
     }
 }

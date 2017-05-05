@@ -10,7 +10,8 @@ import org.openkoreantext.processor.tokenizer.KoreanTokenizer.KoreanToken;
 import scala.collection.JavaConverters;
 import scala.collection.Seq;
 
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -38,6 +39,29 @@ public class OpenKoreanTextTokenizer extends Tokenizer implements KoreanTokenPre
 
     public OpenKoreanTextTokenizer() {
         super(AttributeFactory.DEFAULT_ATTRIBUTE_FACTORY);
+        List<String> words = new ArrayList<>();
+        OpenKoreanTextProcessor.addNounsToDictionary(JavaConverters.asScalaBuffer(words).toSeq());
+    }
+
+    public void addUserDictionary(List<String> words) {
+        OpenKoreanTextProcessor.addNounsToDictionary(JavaConverters.asScalaBuffer(words).toSeq());
+    }
+
+    public void addUserDictionary(String path) throws IOException {
+        File file = new File(path);
+
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+        List<String> words = new ArrayList<>();
+        String word;
+        while ((word = bufferedReader.readLine()) != null) {
+            words.add(word);
+        }
+
+        addUserDictionary(words);
+    }
+
+    public void addUserDictionary(String[] paths) throws IOException {
+        for(String path : paths) addUserDictionary(path);
     }
 
     @Override

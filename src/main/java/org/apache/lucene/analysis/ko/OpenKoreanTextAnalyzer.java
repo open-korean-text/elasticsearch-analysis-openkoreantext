@@ -11,7 +11,7 @@ import java.util.List;
 public class OpenKoreanTextAnalyzer extends StopwordAnalyzerBase {
 
     private final static CharArraySet STOP_WORD_SET;
-    // https://ko.wikipedia.org/wiki/%EA%B8%B4_%ED%95%9C%EA%B5%AD%EC%96%B4_%EB%82%B1%EB%A7%90
+    // Max token length is from https://ko.wikipedia.org/wiki/%EA%B8%B4_%ED%95%9C%EA%B5%AD%EC%96%B4_%EB%82%B1%EB%A7%90
     private final static int MAX_TOKEN_LENGTH = 13;
 
     static {

@@ -14,11 +14,21 @@ public class TokenStreamAssertions {
         int index = 0;
         while (tokenStream.incrementToken() == true) {
             assertEquals(expectedCharTerms[index], tokenStream.getAttribute(CharTermAttribute.class).toString());
-            System.out.println(tokenStream.getAttribute(CharTermAttribute.class).toString());
-            assertEquals(expectedTypes[index], tokenStream.getAttribute(TypeAttribute.class).type());
+
+            if(expectedTypes != null) {
+                assertEquals(expectedTypes[index], tokenStream.getAttribute(TypeAttribute.class).type());
+            }
+
             OffsetAttribute offsets = tokenStream.getAttribute(OffsetAttribute.class);
-            assertEquals(expectedStartOffsets[index], offsets.startOffset());
-            assertEquals(expectedEndOffsets[index], offsets.endOffset());
+
+            if(expectedStartOffsets != null) {
+                assertEquals(expectedStartOffsets[index], offsets.startOffset());
+            }
+
+            if(expectedEndOffsets != null) {
+                assertEquals(expectedEndOffsets[index], offsets.endOffset());
+            }
+
             index++;
         }
     }

@@ -5,6 +5,7 @@ import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.analysis.tokenattributes.TypeAttribute;
 import org.apache.lucene.util.AttributeFactory;
+import org.elasticsearch.common.Strings;
 import org.openkoreantext.processor.OpenKoreanTextProcessor;
 import org.openkoreantext.processor.tokenizer.KoreanTokenizer.KoreanToken;
 import scala.collection.JavaConverters;
@@ -63,6 +64,7 @@ public class OpenKoreanTextTokenizer extends Tokenizer implements KoreanTokenPre
         List<String> words = new ArrayList<>();
         String word;
         while ((word = bufferedReader.readLine()) != null) {
+            if(Strings.isEmpty(word)) continue;
             words.add(word);
         }
         addUserDictionary(words);

@@ -30,34 +30,28 @@ public class OpenKoreanTextTokenizerTest {
 
     @Test
     public void testAddNounsToDictionary() throws IOException {
-        String text = "브루클린버거는 대박맛집이다";
+        String text = "뷁충정식은 맛있다";
 
         OpenKoreanTextTokenizer tokenizer = new OpenKoreanTextTokenizer();
         tokenizer.setReader(new StringReader(text));
 
-        String[] before = new String[]{"브루클린", "버거", "는", " ", "대박", "맛집", "이다"};
-        String[] after = new String[]{"브루클린버거", "는", " ", "대박맛집", "이다"};
-
-        tokenizer.reset();
-        TokenStreamAssertions.assertTokenStream(tokenizer, before, null, null, null);
-        tokenizer.end();
-        tokenizer.close();
+        String[] expected = new String[]{"뷁충정식", "은", " ", "맛있다"};
 
         List<String> userDictionary = new ArrayList<>();
-        userDictionary.add("브루클린버거");
-        userDictionary.add("대박맛집");
+        userDictionary.add("뷁충정식");
+
         tokenizer.addUserDictionary(userDictionary);
 
         tokenizer.setReader(new StringReader(text));
         tokenizer.reset();
-        TokenStreamAssertions.assertTokenStream(tokenizer, after, null, null, null);
+        TokenStreamAssertions.assertTokenStream(tokenizer, expected, null, null, null);
         tokenizer.end();
     }
 
     @Test
     public void testUserDictionaryFromFile() throws IOException {
-        String text = "브루클린버거는 대박맛집이다";
-        String[] expected = new String[]{"브루클린버거", "는", " ", "대박맛집", "이다"};
+        String text = "퀠후푸룩커피는 맛있다";
+        String[] expected = new String[]{"퀠후푸룩커피", "는", " ", "맛있다"};
 
         OpenKoreanTextTokenizer tokenizer = new OpenKoreanTextTokenizer();
 
@@ -73,12 +67,12 @@ public class OpenKoreanTextTokenizerTest {
 
     @Test
     public void testUserDictionaryFromURL() throws IOException {
-        String text = "브루클린버거는 대박맛집이다";
-        String[] expected = new String[]{"브루클린버거", "는", " ", "대박맛집", "이다"};
+        String text = "안비빈비빔밥은 맛있다";
+        String[] expected = new String[]{"안비빈비빔밥", "은", " ", "맛있다"};
 
         OpenKoreanTextTokenizer tokenizer = new OpenKoreanTextTokenizer();
 
-        URL url = new URL("https://raw.githubusercontent.com/open-korean-text/elasticsearch-analysis-openkoreantext/master/src/test/resources/dictionary");
+        URL url = new URL("https://raw.githubusercontent.com/open-korean-text/elasticsearch-analysis-openkoreantext/master/src/test/resources/httpdictionary");
         tokenizer.addUserDictionary(url);
 
         tokenizer.setReader(new StringReader(text));

@@ -113,7 +113,7 @@ Analyzer Plugin을 설치하면 `{ES_HOME}/plugins/elasticserach-analysis-openko
 사전 텍스트 파일은 각 단어들을 줄바꿈하여 넣으면 됩니다. (단, 띄워쓰기는 단어로 인식하지 않습니다.)
 
 ```plain
-# {ES_HOME}/plugins/elasticserach-analysis-openkoreantext/sampledictionary
+# {ES_HOME}/plugins/elasticserach-analysis-openkoreantext/dic/sampledictionary
 말썽쟁이
 뚜쟁이
 욕쟁이할머니

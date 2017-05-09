@@ -11,7 +11,7 @@ import org.junit.Assert;
 import java.util.Collection;
 import java.util.Collections;
 
-public class AnalysisOpenKoreanTextPluginTest  extends ESIntegTestCase {
+public class AnalysisOpenKoreanTextPluginTest extends ESIntegTestCase {
     @Override
     protected Collection<Class<? extends Plugin>> nodePlugins() {
         return Collections.singleton(AnalysisOpenKoreanTextPlugin.class);
@@ -29,5 +29,4 @@ public class AnalysisOpenKoreanTextPluginTest  extends ESIntegTestCase {
             Assert.assertTrue(founded);
         }
     }
-
 }

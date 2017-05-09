@@ -5,16 +5,12 @@ import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.analysis.tokenattributes.TypeAttribute;
 import org.apache.lucene.util.AttributeFactory;
-import org.elasticsearch.common.Strings;
 import org.openkoreantext.processor.OpenKoreanTextProcessor;
 import org.openkoreantext.processor.tokenizer.KoreanTokenizer.KoreanToken;
 import scala.collection.JavaConverters;
 import scala.collection.Seq;
 
-import java.io.*;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -42,32 +38,6 @@ public class OpenKoreanTextTokenizer extends Tokenizer implements KoreanTokenPre
 
     public OpenKoreanTextTokenizer() {
         super(AttributeFactory.DEFAULT_ATTRIBUTE_FACTORY);
-        List<String> words = new ArrayList<>();
-        OpenKoreanTextProcessor.addNounsToDictionary(JavaConverters.asScalaBuffer(words).toSeq());
-    }
-
-    public void addUserDictionary(List<String> words) {
-        OpenKoreanTextProcessor.addNounsToDictionary(JavaConverters.asScalaBuffer(words).toSeq());
-    }
-
-    public void addUserDictionary(String path) throws IOException {
-        File file = new File(path);
-        addUserDictionary(new BufferedReader(new FileReader(file)));
-    }
-
-    public void addUserDictionary(URL url) throws IOException {
-        URLConnection connection = url.openConnection();
-        addUserDictionary(new BufferedReader(new InputStreamReader(connection.getInputStream())));
-    }
-
-    public void addUserDictionary(BufferedReader bufferedReader) throws IOException {
-        List<String> words = new ArrayList<>();
-        String word;
-        while ((word = bufferedReader.readLine()) != null) {
-            if(Strings.isEmpty(word)) continue;
-            words.add(word);
-        }
-        addUserDictionary(words);
     }
 
     @Override

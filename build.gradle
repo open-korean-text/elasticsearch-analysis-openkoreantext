@@ -16,12 +16,11 @@ configurations {
 }
 
 ext {
-    elasticsearchVersion = '5.3.2'
+    elasticsearchVersion = '5.4.0'
     openKoreanTextVersion = '1.1'
 }
 
 test {
-    // ISSUE: https://discuss.elastic.co/t/elasticsearch-5-1-1-simple-integration-test-hangs-running-gradle-test/70485/2
     jvmArgs '-Dtests.security.manager=false'
 }
 
@@ -31,7 +30,6 @@ dependencies {
     compileOnly group: 'org.elasticsearch', name: 'elasticsearch', version: elasticsearchVersion
 
     testCompile group: 'org.elasticsearch.test', name: 'framework', version: elasticsearchVersion
-    testCompile group: 'net.java.dev.jna', name: 'jna', version: '4.1.0'
     testCompile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.7'
     testCompile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.7'
 }
@@ -46,7 +44,7 @@ task makePluginDescriptor(type: Copy) {
             'description': 'Korean analysis plugin integrates open-korean-text module into elasticsearch.',
             'version': '1.0.0',
             'javaVersion': sourceCompatibility,
-            'elasticsearchVersion' : '5.0.0'
+            'elasticsearchVersion' : '5.4.0'
         ]
     ])
 }

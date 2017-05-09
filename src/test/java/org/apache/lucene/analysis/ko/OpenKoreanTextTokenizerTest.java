@@ -40,7 +40,7 @@ public class OpenKoreanTextTokenizerTest {
         List<String> userDictionary = new ArrayList<>();
         userDictionary.add("뷁충정식");
 
-        tokenizer.addUserDictionary(userDictionary);
+        UserDictionaryLoader.addUserDictionary(userDictionary);
 
         tokenizer.setReader(new StringReader(text));
         tokenizer.reset();
@@ -57,7 +57,7 @@ public class OpenKoreanTextTokenizerTest {
 
         File dic = new File(getClass().getClassLoader().getResource("dictionary").getFile());
         String path = dic.getAbsolutePath();
-        tokenizer.addUserDictionary(path);
+        UserDictionaryLoader.addUserDictionary(new File(path));
 
         tokenizer.setReader(new StringReader(text));
         tokenizer.reset();
@@ -73,7 +73,7 @@ public class OpenKoreanTextTokenizerTest {
         OpenKoreanTextTokenizer tokenizer = new OpenKoreanTextTokenizer();
 
         URL url = new URL("https://raw.githubusercontent.com/open-korean-text/elasticsearch-analysis-openkoreantext/master/src/test/resources/httpdictionary");
-        tokenizer.addUserDictionary(url);
+        UserDictionaryLoader.addUserDictionary(url);
 
         tokenizer.setReader(new StringReader(text));
         tokenizer.reset();

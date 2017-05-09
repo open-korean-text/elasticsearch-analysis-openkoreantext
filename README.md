@@ -4,7 +4,7 @@
 
 한국어(한글)를 처리하는 Elasticsearch analyzer입니다. [open-korean-text](https://github.com/open-korean-text/open-korean-text) 한국어 처리엔진으로 작성되었습니다. Elasticsearch 5.x 버젼을 지원합니다.
 
-Korean analysis plugin that integrates open-korean-text module into Elasticsearch.
+Korean analysis plugin that integrates [open-korean-text]((https://github.com/open-korean-text/open-korean-text) module into Elasticsearch.
 
 ## Install
 
@@ -13,9 +13,9 @@ $ cd ${ES_HOME}
 $ bin/elasticsearch-plugin install {download URL}
 ```
 
-`bin/elasticsearch` 실행 시, `loaded plugin [elasticserach-analysis-openkoreantext]` 라는 문구의 로그가 출력되는지 확인합니다.
+설치 후 `bin/elasticsearch` 실행 시, `loaded plugin [elasticserach-analysis-openkoreantext]` 라는 로그가 출력되는지 확인합니다.
 
-**download URL 은 아래 [Compatable Versions](#Compatable-Versions)를 참고하여 적합한 Elasticsearch 버젼에 맞는 Plugin 버젼을 다운로드 받아야합니다.**
+**download URL 은 아래 [Compatable Versions](#compatible-versions)를 참고하여 Elasticsearch 버젼에 맞는 Plugin 버젼을 다운로드 받아야합니다.**
 
 ## Example
 #### Input
@@ -74,14 +74,41 @@ curl -X POST 'http://localhost:9200/_analyze' -d '{
     }
   ]
 }
+
+#---- 기본 분석기를 사용할 경우 결과 -----
+{
+  "tokens": [
+    {
+      "token": "한국어를",
+      "start_offset": 0,
+      "end_offset": 4,
+      "type": "<HANGUL>",
+      "position": 0
+    },
+    {
+      "token": "처리하는",
+      "start_offset": 5,
+      "end_offset": 9,
+      "type": "<HANGUL>",
+      "position": 1
+    },
+    {
+      "token": "예시입니닼ㅋㅋ",
+      "start_offset": 10,
+      "end_offset": 17,
+      "type": "<HANGUL>",
+      "position": 2
+    }
+  ]
+}
 ```
 
 **실제 사용 방법은 [Elasicsearch analysis](https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis.html)를 참고하세요.**
 
 ## User Dictionary
-사용자가 원하는 단어를 추가하여 사용할 수 있습니다. 예를들어 `말썽쟁이`를 분석하면 `말썽(Noun)`과 `쟁이(suffix)`로 추출되지만, 사전에 `말썽쟁이`를 추가하면 `말썽쟁이(Noun)`으로 추출할 수 있습니다.
+[기본사전](https://github.com/open-korean-text/open-korean-text/tree/master/src/main/resources/org/openkoreantext/processor/util) 이외에 사용자가 원하는 단어를 추가하여 사용할 수 있습니다. 예를들어 `말썽쟁이`를 분석하면 `말썽(Noun)`과 `쟁이(suffix)`로 추출되지만, 사전에 `말썽쟁이`를 추가하면 `말썽쟁이(Noun)`로 추출할 수 있습니다.
 
-elasticsearch-analysis-openkoreantext를 설치하면 `{ES_HOME}/plugins/elasticserach-analysis-openkoreantext` 위치에 `dic/` 디렉토리를 찾을 수 있습니다. 해당 디렉토리 안에 사전 텍스트 파일을 추가하면됩니다.
+Analyzer Plugin을 설치하면 `{ES_HOME}/plugins/elasticserach-analysis-openkoreantext` 위치에 `dic/` 디렉토리를 찾을 수 있습니다. 해당 디렉토리 안에 사전 텍스트 파일을 추가하면 됩니다.
 
 사전 텍스트 파일은 각 단어들을 줄바꿈하여 넣으면 됩니다. (단, 띄워쓰기는 단어로 인식하지 않습니다.)
 
@@ -90,10 +117,13 @@ elasticsearch-analysis-openkoreantext를 설치하면 `{ES_HOME}/plugins/elastic
 말썽쟁이
 뚜쟁이
 욕쟁이할머니
+...
 ```
 
 
 ## Components
+이 Analyzer는 몇 가지 [components](https://www.elastic.co/guide/en/elasticsearch/reference/current/analyzer-anatomy.html)로 구성되어 있습니다.
+
 **Charater Filter**
 * openkoreantext-normalizer
   * 구어체를 표준화 합니다.
@@ -119,9 +149,10 @@ elasticsearch-analysis-openkoreantext를 설치하면 `{ES_HOME}/plugins/elastic
 
 **Analyzer**
 
-[`openkoreantext-normalizer`] -> [`openkoreantext-tokenizer`] -> [`openkoreantext-stemmer` `openkoreantext-redundant-filter`  `classic-filter` `length-filter` `lowcase`]
+[`openkoreantext-normalizer`] -> [`openkoreantext-tokenizer`] -> [`openkoreantext-stemmer`, `openkoreantext-redundant-filter`,  `classic-filter`, `length-filter`, `lowcase`]
 
-* Analyzer는 `openkoreantext-phrase-extractor` Analyzer에 적용되어있지 않습니다. 사용하기 위해선 [custom analyzer](https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-custom-analyzer.html)를 구성하여 사용하세요.
+* 이 analyzer에는 `openkoreantext-phrase-extractor`가 기본 token filter로 적용되어있지 않습니다.
+* custom analyzer 구성을 원하시면 [custom analyzer](https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-custom-analyzer.html)를 참고하세요.
 
 ## Compatible Versions
 

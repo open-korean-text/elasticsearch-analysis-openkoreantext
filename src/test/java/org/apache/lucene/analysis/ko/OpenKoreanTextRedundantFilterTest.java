@@ -9,11 +9,11 @@ import java.io.StringReader;
 public class OpenKoreanTextRedundantFilterTest {
     @Test
     public void testBasicUsage() throws IOException {
-        String query = "그리고 이 것은 예시, 또는 예로써, 한국어를 처리하기 입니다";
+        String query = "그리고 이것은 예시, 또는 예로써, 한국어를 처리하기 입니다";
         String[] expectedCharTerms = new String[]{"예시", "예", "한국어", "처리", "하다", "이다"};
         String[] expectedTypes = new String[]{"Noun", "Modifier", "Noun", "Noun", "Verb", "Adjective"};
-        int[] expectedStartOffsets = new int[]{9, 16, 21, 26, 28, 31};
-        int[] expectedEndOffsets = new int[]{11, 17, 24, 28, 30, 34};
+        int[] expectedStartOffsets = new int[]{8, 15, 20, 25, 27, 30};
+        int[] expectedEndOffsets = new int[]{10, 16, 23, 27, 29, 33};
 
         Tokenizer tokenizer = new OpenKoreanTextTokenizer();
         tokenizer.setReader(new StringReader(query));

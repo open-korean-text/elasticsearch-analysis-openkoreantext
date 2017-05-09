@@ -21,7 +21,7 @@ public class OpenKoreanTextRedundantFilter extends OpenKoreanTextTokenFilter {
     private final static Set<String> redundantTerms;
 
     static {
-        String[] types = new String[]{"Space", "Conjunction", "Josa", "Eomi", "PreEomi", "Suffix", "Punctuation"};
+        String[] types = new String[]{"Space", "Conjunction", "Josa", "Eomi", "PreEomi", "Punctuation"};
         redundantTypes = new HashSet<>();
         for(String redundant : types) {
             redundantTypes.add(redundant);

@@ -74,8 +74,10 @@ curl -X POST 'http://localhost:9200/_analyze' -d '{
     }
   ]
 }
+```
 
-#---- elasticsearch의 default analyzer를 사용했을 경우 -----
+Elasticsearch의 default analyzer를 사용했을 경우
+```json
 {
   "tokens": [
     {

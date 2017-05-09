@@ -156,9 +156,21 @@ Analyzer Plugin을 설치하면 `{ES_HOME}/plugins/elasticserach-analysis-openko
 
 ## Compatible Versions
 
-| Analyzer | open-korean-text | Elasticsearch | Download URL |
-|:----:|:----:|:----:|:----|
-| 5.4.0.2 | 2.0.1 | 5.4.0 | https://github.com/open-korean-text/elasticsearch-analysis-openkoreantext/releases/download/5.0.0.0/elasticsearch-analysis-openkoreantext-5.4.0.2-plugin.zip |
+| Elasticsearch | open-korean-text | Download URL |
+|:----:|:----:|:----:|
+| 5.4.0 | 2.0.1 | https://github.com/open-korean-text/elasticsearch-analysis-openkoreantext/releases/download/5.4.0.2/elasticsearch-analysis-openkoreantext-5.4.0.2-plugin.zip |
+| 5.3.2 | 2.0.1 | https://github.com/open-korean-text/elasticsearch-analysis-openkoreantext/releases/download/5.4.0.2/elasticsearch-analysis-openkoreantext-5.3.2.2-plugin.zip |
+| 5.3.1 | 2.0.1 | https://github.com/open-korean-text/elasticsearch-analysis-openkoreantext/releases/download/5.4.0.2/elasticsearch-analysis-openkoreantext-5.3.1.2-plugin.zip |
+| 5.3.0 | 2.0.1 | https://github.com/open-korean-text/elasticsearch-analysis-openkoreantext/releases/download/5.4.0.2/elasticsearch-analysis-openkoreantext-5.3.0.2-plugin.zip |
+| 5.2.2 | 2.0.1 | https://github.com/open-korean-text/elasticsearch-analysis-openkoreantext/releases/download/5.4.0.2/elasticsearch-analysis-openkoreantext-5.2.2.2-plugin.zip |
+| 5.2.1 | 2.0.1 | https://github.com/open-korean-text/elasticsearch-analysis-openkoreantext/releases/download/5.4.0.2/elasticsearch-analysis-openkoreantext-5.2.1.2-plugin.zip |
+| 5.1.2 | 2.0.1 | https://github.com/open-korean-text/elasticsearch-analysis-openkoreantext/releases/download/5.4.0.2/elasticsearch-analysis-openkoreantext-5.1.2.2-plugin.zip |
+| 5.1.1 | 2.0.1 | https://github.com/open-korean-text/elasticsearch-analysis-openkoreantext/releases/download/5.4.0.2/elasticsearch-analysis-openkoreantext-5.1.1.2-plugin.zip |
+| 5.1.0 | 2.0.1 | https://github.com/open-korean-text/elasticsearch-analysis-openkoreantext/releases/download/5.4.0.2/elasticsearch-analysis-openkoreantext-5.1.0.2-plugin.zip |
+| 5.0.2 | 2.0.1 | https://github.com/open-korean-text/elasticsearch-analysis-openkoreantext/releases/download/5.4.0.2/elasticsearch-analysis-openkoreantext-5.0.2.2-plugin.zip |
+| 5.0.1 | 2.0.1 | https://github.com/open-korean-text/elasticsearch-analysis-openkoreantext/releases/download/5.4.0.2/elasticsearch-analysis-openkoreantext-5.0.1.2-plugin.zip |
+| 5.0.0 | 2.0.1 | https://github.com/open-korean-text/elasticsearch-analysis-openkoreantext/releases/download/5.4.0.2/elasticsearch-analysis-openkoreantext-5.0.0.2-plugin.zip |
+
 
 * 5.0.0 미만의 버젼은 지원하지 않습니다. open-korean-text로 작성된 다른 플러그인은 참조하시기 바랍니다.  
   * [tkt-elasticsearch](https://github.com/open-korean-text/open-korean-text-elastic-search)

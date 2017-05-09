@@ -11,6 +11,7 @@ import static org.junit.Assert.assertEquals;
 
 public class TokenStreamAssertions {
     public static void assertTokenStream(TokenStream tokenStream, String[] expectedCharTerms, String[] expectedTypes, int[] expectedStartOffsets, int[] expectedEndOffsets) throws IOException {
+        tokenStream.reset();
         int index = 0;
         while (tokenStream.incrementToken() == true) {
             assertEquals(expectedCharTerms[index], tokenStream.getAttribute(CharTermAttribute.class).toString());
@@ -31,5 +32,6 @@ public class TokenStreamAssertions {
 
             index++;
         }
+        tokenStream.end();
     }
 }

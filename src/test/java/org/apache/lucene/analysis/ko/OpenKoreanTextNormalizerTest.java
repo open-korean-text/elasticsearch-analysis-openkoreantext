@@ -1,17 +1,16 @@
 package org.apache.lucene.analysis.ko;
 
 import org.apache.lucene.analysis.CharFilter;
-import org.elasticsearch.test.ESTestCase;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.StringReader;
 
-public class OpenKoreanTextNormalizerTest extends ESTestCase {
+public class OpenKoreanTextNormalizerTest {
     @Test
     public void testNormalizerCharFilter() throws Exception {
-        String query = "한국어를 처리하는 예시입니닼ㅋㅋㅋㅋㅋ. 오픈코리안텍스틓ㅎㅎㅎ";
-        String expected = "한국어를 처리하는 예시입니다ㅋㅋ. 오픈코리안텍스트ㅎㅎ";
+        String query = "한국어를 처리하는 예시입니닼ㅋ. 오픈코리안텍스틓ㅎㅎㅎㅎㅎㅎㅎ";
+        String expected = "한국어를 처리하는 예시입니다ㅋ. 오픈코리안텍스트ㅎㅎㅎ";
 
         CharFilter inputReader = new OpenKoreanTextNormalizer(new StringReader(query));
 

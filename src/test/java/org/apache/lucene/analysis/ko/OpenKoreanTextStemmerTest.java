@@ -1,6 +1,5 @@
 package org.apache.lucene.analysis.ko;
 
-import org.apache.lucene.analysis.TokenFilter;
 import org.apache.lucene.analysis.Tokenizer;
 import org.junit.Test;
 
@@ -20,10 +19,8 @@ public class OpenKoreanTextStemmerTest  {
         Tokenizer tokenizer = new OpenKoreanTextTokenizer();
         tokenizer.setReader(new StringReader(query));
 
-        TokenFilter tokenFilter = new OpenKoreanTextStemmer(tokenizer);
+        OpenKoreanTextTokenFilter tokenFilter = new OpenKoreanTextStemmer(tokenizer);
 
-        tokenFilter.reset();
         TokenStreamAssertions.assertTokenStream(tokenFilter, expectedCharTerms, expectedTypes, expectedStartOffsets, expectedEndOffsets);
-        tokenFilter.end();
     }
 }

@@ -18,14 +18,12 @@ public class OpenKoreanTextTokenizerTest {
         OpenKoreanTextTokenizer tokenizer = new OpenKoreanTextTokenizer();
         tokenizer.setReader(new StringReader(text));
 
-        String[] expectedCharTerms = new String[]{"한국어", "를", " ", "처리하는", " ", "예시", "입니", "다", "ㅋㅋ"};
-        String[] expectedTypes = new String[]{"Noun", "Josa", "Space", "Verb", "Space", "Noun", "Adjective", "Eomi", "KoreanParticle"};
-        int[] expectedStartOffsets = new int[]{0, 3, 4, 5, 9, 10, 12, 14, 15};
-        int[] expectedEndOffsets = new int[]{3, 4, 5, 9, 10, 12, 14, 15, 17};
+        String[] expectedCharTerms = new String[]{"한국어", "를", " ", "처리", "하는", " ", "예시", "입니다", "ㅋㅋ"};
+        String[] expectedTypes = new String[]{"Noun", "Josa", "Space", "Noun", "Verb", "Space", "Noun", "Adjective", "KoreanParticle"};
+        int[] expectedStartOffsets = new int[]{0, 3, 4, 5, 7, 9, 10, 12, 15};
+        int[] expectedEndOffsets = new int[]{3, 4, 5, 7, 9, 10, 12, 15, 17};
 
-        tokenizer.reset();
         TokenStreamAssertions.assertTokenStream(tokenizer, expectedCharTerms, expectedTypes, expectedStartOffsets, expectedEndOffsets);
-        tokenizer.end();
     }
 
     @Test
@@ -43,9 +41,8 @@ public class OpenKoreanTextTokenizerTest {
         UserDictionaryLoader.addUserDictionary(userDictionary);
 
         tokenizer.setReader(new StringReader(text));
-        tokenizer.reset();
+
         TokenStreamAssertions.assertTokenStream(tokenizer, expected, null, null, null);
-        tokenizer.end();
     }
 
     @Test
@@ -60,9 +57,7 @@ public class OpenKoreanTextTokenizerTest {
         UserDictionaryLoader.addUserDictionary(new File(path));
 
         tokenizer.setReader(new StringReader(text));
-        tokenizer.reset();
         TokenStreamAssertions.assertTokenStream(tokenizer, expected, null, null, null);
-        tokenizer.end();
     }
 
     @Test
@@ -76,8 +71,7 @@ public class OpenKoreanTextTokenizerTest {
         UserDictionaryLoader.addUserDictionary(url);
 
         tokenizer.setReader(new StringReader(text));
-        tokenizer.reset();
+
         TokenStreamAssertions.assertTokenStream(tokenizer, expected, null, null, null);
-        tokenizer.end();
     }
 }

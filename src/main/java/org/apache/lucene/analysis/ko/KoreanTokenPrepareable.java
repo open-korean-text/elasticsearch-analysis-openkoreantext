@@ -14,4 +14,6 @@ public interface KoreanTokenPrepareable {
      * To prepare all tokens before token increment.
      */
     Seq<KoreanToken> prepareKoreanTokens() throws IOException;
+
+    KoreanToken getCurrentToken();
 }

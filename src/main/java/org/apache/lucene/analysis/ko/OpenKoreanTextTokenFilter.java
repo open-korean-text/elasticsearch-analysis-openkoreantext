@@ -18,6 +18,7 @@ public abstract class OpenKoreanTextTokenFilter extends TokenFilter implements K
     private final CharTermAttribute charTermAttribute = addAttribute(CharTermAttribute.class);
     private final OffsetAttribute offsetAttribute = addAttribute(OffsetAttribute.class);
     private final TypeAttribute typeAttribute = addAttribute(TypeAttribute.class);
+    private KoreanToken currentToken;
 
     protected int tokenIndex = 0;
     protected List<KoreanToken> preparedTokens = null;
@@ -57,16 +58,23 @@ public abstract class OpenKoreanTextTokenFilter extends TokenFilter implements K
         initializeState();
     }
 
+    @Override
+    public KoreanToken getCurrentToken() {
+        return this.currentToken;
+    }
+
     protected abstract Seq<KoreanToken> perform(Seq<KoreanToken> tokens);
 
     private void setAttributes(KoreanToken token) {
         charTermAttribute.append(token.text());
         offsetAttribute.setOffset(token.offset(), token.offset() + token.length());
         typeAttribute.setType(token.pos().toString());
+        this.currentToken = token;
     }
 
     private void initializeState() {
         this.tokenIndex = 0;
         this.preparedTokens = null;
+        this.currentToken = null;
     }
 }

@@ -28,6 +28,8 @@ public class OpenKoreanTextTokenizer extends Tokenizer implements KoreanTokenPre
 
     private List<KoreanToken> preparedTokens = null;
 
+    private KoreanToken currentToken = null;
+
     private final CharTermAttribute charTermAttribute = addAttribute(CharTermAttribute.class);
 
     private final OffsetAttribute offsetAttribute = addAttribute(OffsetAttribute.class);
@@ -68,6 +70,11 @@ public class OpenKoreanTextTokenizer extends Tokenizer implements KoreanTokenPre
         initializeState();
     }
 
+    @Override
+    public KoreanToken getCurrentToken(){
+        return this.currentToken;
+    }
+
     private CharSequence readText() throws IOException {
         StringBuilder text = new StringBuilder();
         char[] tmp = new char[READER_BUFFER_SIZE];
@@ -82,10 +89,12 @@ public class OpenKoreanTextTokenizer extends Tokenizer implements KoreanTokenPre
         charTermAttribute.append(token.text());
         offsetAttribute.setOffset(token.offset(), token.offset() + token.length());
         typeAttribute.setType(token.pos().toString());
+        this.currentToken = token;
     }
 
     private void initializeState() {
         this.tokenIndex = 0;
         this.preparedTokens = null;
+        this.currentToken = null;
     }
 }

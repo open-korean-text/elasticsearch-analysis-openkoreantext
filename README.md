@@ -138,7 +138,7 @@ Analyzer Plugin을 설치하면 `{ES_HOME}/plugins/elasticserach-analysis-openko
 
 **Token Filter**
 * openkoreantext-stemmer
-  * 형용사와 동사를 스태밍합니다.
+  * 형용사와 동사를 스테밍합니다.
   > 새로운 스테밍을 추가했었다. -> [새롭다, 스테밍, 을, 추가하다, .]
 
 * openkoreantext-redundant-filter

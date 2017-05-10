@@ -15,7 +15,7 @@ $ bin/elasticsearch-plugin install {download URL}
 
 설치 후 `bin/elasticsearch` 실행 시, `loaded plugin [elasticserach-analysis-openkoreantext]` 라는 로그가 출력되는지 확인합니다.
 
-**download URL 은 아래 [Compatable Versions](#compatible-versions)를 참고하여 Elasticsearch 버젼에 맞는 Plugin 버젼을 다운로드 받아야합니다.**
+**download URL 은 아래 [Compatible Versions](#compatible-versions)를 참고하여 Elasticsearch 버젼에 맞는 Plugin 버젼을 다운로드 받아야합니다.**
 
 ## Example
 #### Input

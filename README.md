@@ -136,7 +136,7 @@ Analyzer Plugin을 설치하면 `{ES_HOME}/plugins/elasticserach-analysis-openko
   * 문장을 토큰화 합니다.
   > 한국어를 처리하는 예시입니다 ㅋㅋ -> [한국어, 를, 처리, 하는, 예시, 입니다, ㅋㅋ]
 
-**Token Fileter**
+**Token Filter**
 * openkoreantext-stemmer
   * 형용사와 동사를 스태밍합니다.
   > 새로운 스테밍을 추가했었다. -> [새롭다, 스테밍, 을, 추가하다, .]

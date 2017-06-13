@@ -15,7 +15,7 @@ $ bin/elasticsearch-plugin install {download URL}
 
 설치 후 `bin/elasticsearch` 실행 시, `loaded plugin [elasticserach-analysis-openkoreantext]` 라는 로그가 출력되는지 확인합니다.
 
-**download URL 은 아래 [Compatable Versions](#compatible-versions)를 참고하여 Elasticsearch 버젼에 맞는 Plugin 버젼을 다운로드 받아야합니다.**
+**download URL 은 아래 [Compatible Versions](#compatible-versions)를 참고하여 Elasticsearch 버젼에 맞는 Plugin 버젼을 다운로드 받아야합니다.**
 
 ## Example
 #### Input
@@ -74,8 +74,10 @@ curl -X POST 'http://localhost:9200/_analyze' -d '{
     }
   ]
 }
+```
 
-#---- 기본 분석기를 사용할 경우 결과 -----
+Elasticsearch의 default analyzer를 사용했을 경우
+```json
 {
   "tokens": [
     {
@@ -113,7 +115,7 @@ Analyzer Plugin을 설치하면 `{ES_HOME}/plugins/elasticserach-analysis-openko
 사전 텍스트 파일은 각 단어들을 줄바꿈하여 넣으면 됩니다. (단, 띄워쓰기는 단어로 인식하지 않습니다.)
 
 ```plain
-# {ES_HOME}/plugins/elasticserach-analysis-openkoreantext/sampledictionary
+# {ES_HOME}/plugins/elasticserach-analysis-openkoreantext/dic/sampledictionary
 말썽쟁이
 뚜쟁이
 욕쟁이할머니
@@ -134,9 +136,9 @@ Analyzer Plugin을 설치하면 `{ES_HOME}/plugins/elasticserach-analysis-openko
   * 문장을 토큰화 합니다.
   > 한국어를 처리하는 예시입니다 ㅋㅋ -> [한국어, 를, 처리, 하는, 예시, 입니다, ㅋㅋ]
 
-**Token Fileter**
+**Token Filter**
 * openkoreantext-stemmer
-  * 형용사와 동사를 스태밍합니다.
+  * 형용사와 동사를 스테밍합니다.
   > 새로운 스테밍을 추가했었다. -> [새롭다, 스테밍, 을, 추가하다, .]
 
 * openkoreantext-redundant-filter

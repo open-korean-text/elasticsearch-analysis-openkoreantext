@@ -1,5 +1,5 @@
 group 'org.openkoreantext'
-version '5.4.2.2'
+version '5.4.3.2'
 
 apply plugin: 'java'
 
@@ -16,7 +16,7 @@ configurations {
 }
 
 ext {
-    elasticsearchVersion = '5.4.2'
+    elasticsearchVersion = '5.4.3'
     openKoreanTextVersion = '2.0.1'
 }
 
@@ -44,7 +44,7 @@ task makePluginDescriptor(type: Copy) {
             'description': 'Korean analysis plugin integrates open-korean-text module into elasticsearch.',
             'version': '1.0.0',
             'javaVersion': sourceCompatibility,
-            'elasticsearchVersion' : '5.4.2'
+            'elasticsearchVersion' : '5.4.3'
         ]
     ])
 }

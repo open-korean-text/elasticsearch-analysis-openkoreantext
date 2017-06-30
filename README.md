@@ -151,7 +151,7 @@ Analyzer Plugin을 설치하면 `{ES_HOME}/plugins/elasticserach-analysis-openko
 
 **Analyzer**
 
-[`openkoreantext-normalizer`] -> [`openkoreantext-tokenizer`] -> [`openkoreantext-stemmer`, `openkoreantext-redundant-filter`,  `classic-filter`, `length-filter`, `lowcase`]
+[`openkoreantext-normalizer`] -> [`openkoreantext-tokenizer`] -> [`openkoreantext-stemmer`, `openkoreantext-redundant-filter`,  `classic`, `length`, `lowercase`]
 
 * 이 analyzer에는 `openkoreantext-phrase-extractor`가 기본 token filter로 적용되어있지 않습니다.
 * custom analyzer 구성을 원하시면 [custom analyzer](https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-custom-analyzer.html)를 참고하세요.

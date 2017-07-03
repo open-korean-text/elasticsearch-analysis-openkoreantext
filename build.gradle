@@ -2,6 +2,8 @@ group 'org.openkoreantext'
 version '5.4.3.2'
 
 apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'signing'
 
 sourceCompatibility = 1.8
 
@@ -59,6 +61,70 @@ task buildPluginZip(type: Zip, dependsOn: [':jar', ':makePluginDescriptor']) {
 
 build.finalizedBy(buildPluginZip)
 
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives jar
+    archives javadocJar
+    archives sourcesJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name 'elasticsearch-analysis-openkoreantext'
+                packaging 'jar'
+                description 'Korean analysis plugin integrates open-korean-text module into elasticsearch.'
+                url 'https://github.com/open-korean-text/elasticsearch-analysis-openkoreantext'
+
+                scm {
+                    connection 'scm:git:git://github.com/open-korean-text/elasticsearch-analysis-openkoreantext.git'
+                    developerConnection 'scm:git:ssh://github.com:open-korean-text/elasticsearch-analysis-openkoreantext.git'
+                    url 'https://github.com/open-korean-text/elasticsearch-analysis-openkoreantext/tree/master'
+                }
+
+                licenses {
+                    license {
+                        name 'The Apache License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        distribution 'repo'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'keepcosmos'
+                        name 'Jaehyun Shin'
+                        email 'keepcosmos@gmail.com'
+                    }
+                }
+            }
+        }
+    }
+}
 
 task wrapper(type: Wrapper) {
     gradleVersion = '3.4'

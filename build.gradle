@@ -162,13 +162,10 @@ task jacocoRootReport(type: org.gradle.testing.jacoco.tasks.JacocoReport) {
         html.enabled = true
         xml.enabled = true
         csv.enabled = false
+
+        xml.destination "build/reports/jacoco/test/jacocoTestReport.xml"
     }
 }
-//
-//coveralls {
-////    jacocoReportPath = "build/reports/jacoco/jacocoRootReport/jacocoRootReport.xml"
-//    sourceDirs = files(sourceSets.main.allSource.srcDirs).files.absolutePath
-//}
 
 task wrapper(type: Wrapper) {
     gradleVersion = '3.4'

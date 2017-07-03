@@ -1,17 +1,24 @@
 group 'org.openkoreantext'
 version '5.4.3.2'
 
+sourceCompatibility = 1.8
+
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:1.0.2'
+    }
+}
+
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'signing'
 apply plugin: 'jacoco'
-
-sourceCompatibility = 1.8
-
-repositories {
-    mavenCentral()
-    jcenter()
-}
+apply plugin: 'com.github.kt3k.coveralls'
 
 configurations {
     distJars {
@@ -152,6 +159,10 @@ task jacocoRootReport(type: org.gradle.testing.jacoco.tasks.JacocoReport) {
         xml.enabled = true
         csv.enabled = false
     }
+}
+
+coveralls {
+    sourceDirs = files(sourceSets.main.allSource.srcDirs).files.absolutePath
 }
 
 task wrapper(type: Wrapper) {

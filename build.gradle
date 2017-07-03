@@ -1,11 +1,13 @@
 group 'org.openkoreantext'
 version '5.4.3.2'
 
-sourceCompatibility = 1.8
+repositories {
+    mavenCentral()
+    jcenter()
+}
 
 buildscript {
     repositories {
-        mavenCentral()
         jcenter()
     }
 
@@ -19,6 +21,8 @@ apply plugin: 'maven'
 apply plugin: 'signing'
 apply plugin: 'jacoco'
 apply plugin: 'com.github.kt3k.coveralls'
+
+sourceCompatibility = 1.8
 
 configurations {
     distJars {

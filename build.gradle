@@ -12,16 +12,15 @@ buildscript {
     }
 
     dependencies {
-        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:1.0.2'
+        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:0.2.5'
     }
 }
 
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'signing'
-apply plugin: 'base'
 apply plugin: 'jacoco'
-apply plugin: 'com.github.kt3k.coveralls'
+apply plugin: 'coveralls'
 
 sourceCompatibility = 1.8
 
@@ -165,11 +164,11 @@ task jacocoRootReport(type: org.gradle.testing.jacoco.tasks.JacocoReport) {
         csv.enabled = false
     }
 }
-
-coveralls {
-    jacocoReportPath = "build/reports/jacoco/jacocoRootReport/jacocoRootReport.xml"
-    sourceDirs = files(sourceSets.main.allSource.srcDirs).files.absolutePath
-}
+//
+//coveralls {
+////    jacocoReportPath = "build/reports/jacoco/jacocoRootReport/jacocoRootReport.xml"
+//    sourceDirs = files(sourceSets.main.allSource.srcDirs).files.absolutePath
+//}
 
 task wrapper(type: Wrapper) {
     gradleVersion = '3.4'

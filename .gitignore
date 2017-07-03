@@ -37,4 +37,4 @@ bin/
 hs_err_pid*
 
 
-gradle.properties
+secret.properties

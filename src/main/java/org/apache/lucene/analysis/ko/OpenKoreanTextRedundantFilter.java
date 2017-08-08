@@ -4,10 +4,7 @@ import org.apache.lucene.analysis.TokenStream;
 import scala.collection.JavaConverters;
 import scala.collection.Seq;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static org.openkoreantext.processor.tokenizer.KoreanTokenizer.KoreanToken;
 
@@ -51,6 +48,7 @@ public class OpenKoreanTextRedundantFilter extends OpenKoreanTextTokenFilter {
             }
             performed.add(token);
         }
+
         return JavaConverters.asScalaBuffer(performed).toSeq();
     }
 }

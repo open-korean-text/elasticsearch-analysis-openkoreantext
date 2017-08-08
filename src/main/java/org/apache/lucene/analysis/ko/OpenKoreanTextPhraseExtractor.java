@@ -32,6 +32,13 @@ public class OpenKoreanTextPhraseExtractor extends OpenKoreanTextTokenFilter {
             KoreanPhrase phrase = iterator.next();
             tokens[i++] = new KoreanToken(phrase.text(), phrase.pos(), phrase.offset(), phrase.length(), scala.Option.apply(null), false);
         }
+
+        Arrays.sort(tokens, (o1, o2) -> {
+            if(o1.offset()== o2.offset())
+                return 0;
+            return o1.offset()< o2.offset()? -1 : 1;
+        });
+
         return JavaConverters.asScalaBuffer(Arrays.asList(tokens)).toSeq();
     }
 }

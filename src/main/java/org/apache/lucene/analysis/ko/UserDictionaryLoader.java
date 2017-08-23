@@ -1,6 +1,8 @@
 package org.apache.lucene.analysis.ko;
 
+import org.apache.logging.log4j.Logger;
 import org.elasticsearch.common.Strings;
+import org.elasticsearch.common.logging.ESLoggerFactory;
 import org.elasticsearch.index.analysis.OpenKoreanTextTokenizerFactory;
 import org.openkoreantext.processor.OpenKoreanTextProcessor;
 import scala.collection.JavaConverters;
@@ -8,6 +10,7 @@ import scala.collection.JavaConverters;
 import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
+import java.security.AccessControlException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,18 +22,25 @@ import java.util.Map;
  */
 public class UserDictionaryLoader {
 
+    private static Logger logger = ESLoggerFactory.getLogger(UserDictionaryLoader.class);
+
     private final static Map<String, Boolean> loadedDictionaryFiles = new HashMap<>();
 
     private static final String DEFAULT_DIC_SUFFIX = "dic/";
-    private static final File[] dicFiles;
+    private static File[] dicFiles;
 
     static {
         String currentPath = OpenKoreanTextTokenizerFactory.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-        File dicDirectory = new File(new File(currentPath).getParent() + "/" + DEFAULT_DIC_SUFFIX);
-        if(dicDirectory.isDirectory()) {
-            dicFiles = dicDirectory.listFiles();
-        } else {
-            dicFiles = new File[]{};
+
+        dicFiles = new File[]{};
+
+        try {
+            File dicDirectory = new File(new File(currentPath).getParent() + "/" + DEFAULT_DIC_SUFFIX);
+            if(dicDirectory.isDirectory()) {
+                dicFiles = dicDirectory.listFiles();
+            }
+        } catch (AccessControlException e) {
+            logger.error("Can not load dictionary files", e);
         }
     }
 

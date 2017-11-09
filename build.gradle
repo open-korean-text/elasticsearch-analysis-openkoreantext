@@ -1,5 +1,5 @@
 group 'org.openkoreantext'
-version '5.6.2.2'
+version '5.6.4.2'
 
 apply plugin: 'java'
 apply plugin: 'maven'
@@ -20,7 +20,7 @@ configurations {
 }
 
 ext {
-    elasticsearchVersion = '5.6.2'
+    elasticsearchVersion = '5.6.4'
     openKoreanTextVersion = '2.1.0'
 }
 

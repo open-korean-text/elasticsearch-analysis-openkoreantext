@@ -1,5 +1,5 @@
 group 'org.openkoreantext'
-version '5.6.4.2'
+version '6.0.0.2'
 
 apply plugin: 'java'
 apply plugin: 'maven'
@@ -20,7 +20,7 @@ configurations {
 }
 
 ext {
-    elasticsearchVersion = '5.6.4'
+    elasticsearchVersion = '6.0.0'
     openKoreanTextVersion = '2.1.0'
 }
 
@@ -74,58 +74,6 @@ artifacts {
     archives javadocJar
     archives sourcesJar
 }
-
-signing {
-    sign configurations.archives
-}
-
-signArchives.enabled = false
-
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-
-            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
-            }
-
-            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
-            }
-
-            pom.project {
-                name 'elasticsearch-analysis-openkoreantext'
-                packaging 'jar'
-                description 'Korean analysis plugin integrates open-korean-text module into elasticsearch.'
-                url 'https://github.com/open-korean-text/elasticsearch-analysis-openkoreantext'
-
-                scm {
-                    connection 'scm:git:git://github.com/open-korean-text/elasticsearch-analysis-openkoreantext.git'
-                    developerConnection 'scm:git:ssh://github.com:open-korean-text/elasticsearch-analysis-openkoreantext.git'
-                    url 'https://github.com/open-korean-text/elasticsearch-analysis-openkoreantext/tree/master'
-                }
-
-                licenses {
-                    license {
-                        name 'The Apache License, Version 2.0'
-                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                        distribution 'repo'
-                    }
-                }
-
-                developers {
-                    developer {
-                        id 'keepcosmos'
-                        name 'Jaehyun Shin'
-                        email 'keepcosmos@gmail.com'
-                    }
-                }
-            }
-        }
-    }
-}
-
 
 test {
     jvmArgs '-Dtests.security.manager=false'

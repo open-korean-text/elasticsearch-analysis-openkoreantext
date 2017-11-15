@@ -4,7 +4,7 @@
 
 한국어(한글)를 처리하는 Elasticsearch analyzer입니다. [open-korean-text](https://github.com/open-korean-text/open-korean-text) 한국어 처리엔진으로 작성되었습니다.
 
-Korean analysis plugin that integrates [open-korean-text]((https://github.com/open-korean-text/open-korean-text) module into Elasticsearch.
+Korean analysis plugin that integrates [open-korean-text](https://github.com/open-korean-text/open-korean-text) module into Elasticsearch.
 
 Elasticsearch 4.x 이하의 버전은 지원하지 않습니다.
 

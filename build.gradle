@@ -1,5 +1,5 @@
 group 'org.openkoreantext'
-version '6.0.0.2'
+version '6.1.1.2'
 
 apply plugin: 'java'
 apply plugin: 'maven'
@@ -20,7 +20,7 @@ configurations {
 }
 
 ext {
-    elasticsearchVersion = '6.0.0'
+    elasticsearchVersion = '6.1.1'
     openKoreanTextVersion = '2.1.0'
 }
 
@@ -62,6 +62,12 @@ build.finalizedBy(buildPluginZip)
 task javadocJar(type: Jar) {
     classifier = 'javadoc'
     from javadoc
+}
+
+tasks.withType(Javadoc) {
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
 }
 
 task sourcesJar(type: Jar) {

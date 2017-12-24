@@ -8,6 +8,9 @@ import java.io.Reader;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * A default korean analyzer.
+ */
 public class OpenKoreanTextAnalyzer extends StopwordAnalyzerBase {
 
     private final static CharArraySet STOP_WORD_SET;

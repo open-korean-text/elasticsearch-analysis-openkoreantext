@@ -6,6 +6,9 @@ import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.env.Environment;
 import org.elasticsearch.index.IndexSettings;
 
+/**
+ * A ES token filter factory for {@link OpenKoreanTextPhraseExtractor}.
+ */
 public class OpenKoreanTextPhraseExtractorFactory extends AbstractTokenFilterFactory {
 
     public OpenKoreanTextPhraseExtractorFactory(IndexSettings indexSettings, Environment env, String name, Settings settings) {

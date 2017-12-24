@@ -7,7 +7,7 @@ import java.io.IOException;
 import static org.openkoreantext.processor.tokenizer.KoreanTokenizer.KoreanToken;
 
 /**
- * To prepare korean token sequence
+ * To prepare korean token sequence.
  */
 public interface KoreanTokenPrepareable {
     /**

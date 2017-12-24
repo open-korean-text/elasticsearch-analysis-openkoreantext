@@ -6,6 +6,12 @@ import org.openkoreantext.processor.OpenKoreanTextProcessor;
 import java.io.IOException;
 import java.io.Reader;
 
+/**
+ * A character filter for normalizing input text.
+ * For normalizing text, it delegates input to {@link OpenKoreanTextProcessor}.
+ *
+ * ex) 그랰ㅋㅋ -> 그래ㅋㅋ, 재밌닿ㅎㅎㅎ -> 재밌다ㅎㅎ
+ */
 public class OpenKoreanTextNormalizer extends BaseCharFilter {
     private static final int READER_BUFFER_SIZE = 2048;
 

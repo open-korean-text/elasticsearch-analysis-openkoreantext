@@ -15,6 +15,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Provides Korean tokenization.
+ *
+ * {@see https://github.com/open-korean-text/open-korean-text/blob/master/src/main/scala/org/openkoreantext/processor/tokenizer/KoreanTokenizer.scala}
+ */
 public class OpenKoreanTextTokenizer extends Tokenizer implements KoreanTokenPrepareable {
 
     private static final int READER_BUFFER_SIZE = 1024;

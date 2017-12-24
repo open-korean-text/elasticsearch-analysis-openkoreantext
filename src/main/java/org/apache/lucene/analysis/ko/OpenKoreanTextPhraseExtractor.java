@@ -11,6 +11,11 @@ import java.util.Arrays;
 import static org.openkoreantext.processor.phrase_extractor.KoreanPhraseExtractor.KoreanPhrase;
 import static org.openkoreantext.processor.tokenizer.KoreanTokenizer.KoreanToken;
 
+/**
+ * Phrase Extractor. For extracting phrase, it delegates token to {@link OpenKoreanTextProcessor}
+ *
+ * {@see https://github.com/open-korean-text/open-korean-text/blob/master/src/main/scala/org/openkoreantext/processor/phrase_extractor/KoreanPhraseExtractor.scala}
+ */
 public class OpenKoreanTextPhraseExtractor extends OpenKoreanTextTokenFilter {
 
     public OpenKoreanTextPhraseExtractor(TokenStream input) {

@@ -13,6 +13,9 @@ import java.util.List;
 
 import static org.openkoreantext.processor.tokenizer.KoreanTokenizer.KoreanToken;
 
+/**
+ * Abstract token filter for processing korean tokens.
+ */
 public abstract class OpenKoreanTextTokenFilter extends TokenFilter implements KoreanTokenPrepareable {
 
     private final CharTermAttribute charTermAttribute = addAttribute(CharTermAttribute.class);

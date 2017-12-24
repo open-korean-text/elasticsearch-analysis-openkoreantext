@@ -6,6 +6,9 @@ import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.env.Environment;
 import org.elasticsearch.index.IndexSettings;
 
+/**
+ * A ES token filter factory for {@link OpenKoreanTextStemmer}.
+ */
 public class OpenKoreanTextStemmerFactory extends AbstractTokenFilterFactory {
 
     public OpenKoreanTextStemmerFactory(IndexSettings indexSettings, Environment env, String name, Settings settings) {

@@ -6,6 +6,9 @@ import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.env.Environment;
 import org.elasticsearch.index.IndexSettings;
 
+/**
+ * A analyzer provider for openkoreantext.
+ */
 public class OpenKoreanTextAnalyzerProvider extends AbstractIndexAnalyzerProvider<OpenKoreanTextAnalyzer> {
 
     private final OpenKoreanTextAnalyzer analyzer;

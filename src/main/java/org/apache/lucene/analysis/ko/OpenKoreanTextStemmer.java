@@ -9,6 +9,11 @@ import java.util.Arrays;
 
 import static org.openkoreantext.processor.tokenizer.KoreanTokenizer.KoreanToken;
 
+/**
+ * Stems Adjectives and Verbs tokens.
+ *
+ * {@see https://github.com/open-korean-text/open-korean-text/blob/master/src/main/scala/org/openkoreantext/processor/stemmer/KoreanStemmer.scala}
+ */
 public final class OpenKoreanTextStemmer extends OpenKoreanTextTokenFilter {
 
     public OpenKoreanTextStemmer(TokenStream input) {

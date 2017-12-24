@@ -9,6 +9,9 @@ import org.apache.lucene.analysis.ko.OpenKoreanTextStemmer;
 
 import java.io.Reader;
 
+/**
+ * A ES character-filter factory for {@link OpenKoreanTextNormalizer}.
+ */
 public class OpenKoreanTextNormalizerFactory extends AbstractCharFilterFactory implements MultiTermAwareComponent {
 
     public OpenKoreanTextNormalizerFactory(IndexSettings indexSettings, Environment env, String name, Settings settings) {

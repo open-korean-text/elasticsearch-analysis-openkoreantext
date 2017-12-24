@@ -162,7 +162,10 @@ Analyzer Plugin을 설치하면 `{ES_HOME}/plugins/elasticserach-analysis-openko
 
 | Elasticsearch | open-korean-text | Download URL |
 |:----:|:----:|:----|
+| 6.1.1 | 2.1.0 | https://github.com/open-korean-text/elasticsearch-analysis-openkoreantext/releases/download/6.1.1/elasticsearch-analysis-openkoreantext-6.1.1.2-plugin.zip |
+| 6.1.0 | 2.1.0 | https://github.com/open-korean-text/elasticsearch-analysis-openkoreantext/releases/download/6.1.1/elasticsearch-analysis-openkoreantext-6.1.0.2-plugin.zip |
 | 6.0.0 | 2.1.0 | https://github.com/open-korean-text/elasticsearch-analysis-openkoreantext/releases/download/6.0.0.2/elasticsearch-analysis-openkoreantext-6.0.0.2-plugin.zip |
+| 5.6.5 | 2.1.0 | https://github.com/open-korean-text/elasticsearch-analysis-openkoreantext/releases/download/6.1.1/elasticsearch-analysis-openkoreantext-5.6.5.2-plugin.zip |
 | 5.6.4 | 2.1.0 | https://github.com/open-korean-text/elasticsearch-analysis-openkoreantext/releases/download/5.6.4.2/elasticsearch-analysis-openkoreantext-5.6.4.2-plugin.zip |
 | 5.6.3 | 2.1.0 | https://github.com/open-korean-text/elasticsearch-analysis-openkoreantext/releases/download/5.6.4.2/elasticsearch-analysis-openkoreantext-5.6.3.2-plugin.zip |
 | 5.6.2 | 2.1.0 | https://github.com/open-korean-text/elasticsearch-analysis-openkoreantext/releases/download/v5.6.x/elasticsearch-analysis-openkoreantext-5.6.2.2-plugin.zip |

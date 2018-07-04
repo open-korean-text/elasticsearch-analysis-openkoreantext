@@ -1,5 +1,5 @@
 group 'org.openkoreantext'
-version '6.1.1.2'
+version '6.3.0.0'
 
 apply plugin: 'java'
 apply plugin: 'maven'
@@ -20,7 +20,7 @@ configurations {
 }
 
 ext {
-    elasticsearchVersion = '6.1.1'
+    elasticsearchVersion = '6.3.0'
     openKoreanTextVersion = '2.1.0'
 }
 
@@ -53,7 +53,7 @@ task buildPluginZip(type: Zip, dependsOn: [':jar', ':makePluginDescriptor']) {
     from configurations.distJars
     from jar.archivePath
     from 'build/tmp/plugin'
-    into 'elasticsearch'
+    into '.'
     classifier = 'plugin'
 }
 

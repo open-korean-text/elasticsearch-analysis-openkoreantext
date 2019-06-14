@@ -20,7 +20,7 @@ configurations {
 }
 
 ext {
-    elasticsearchVersion = '6.3.0'
+    elasticsearchVersion = '6.8.0'
     openKoreanTextVersion = '2.1.0'
 }
 

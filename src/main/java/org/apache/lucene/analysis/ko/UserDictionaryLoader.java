@@ -2,7 +2,7 @@ package org.apache.lucene.analysis.ko;
 
 import org.apache.logging.log4j.Logger;
 import org.elasticsearch.common.Strings;
-import org.elasticsearch.common.logging.ESLoggerFactory;
+//import org.elasticsearch.common.logging.ESLoggerFactory;
 import org.elasticsearch.index.analysis.OpenKoreanTextTokenizerFactory;
 import org.openkoreantext.processor.OpenKoreanTextProcessor;
 import scala.collection.JavaConverters;
@@ -22,7 +22,7 @@ import java.util.Map;
  */
 public class UserDictionaryLoader {
 
-    private static Logger logger = ESLoggerFactory.getLogger(UserDictionaryLoader.class);
+    //private static Logger logger = ESLoggerFactory.getLogger(UserDictionaryLoader.class);
 
     private final static Map<String, Boolean> loadedDictionaryFiles = new HashMap<>();
 
@@ -40,7 +40,7 @@ public class UserDictionaryLoader {
                 dicFiles = dicDirectory.listFiles();
             }
         } catch (AccessControlException e) {
-            logger.error("Can not load dictionary files", e);
+            //logger.error("Can not load dictionary files", e);
         }
     }
 

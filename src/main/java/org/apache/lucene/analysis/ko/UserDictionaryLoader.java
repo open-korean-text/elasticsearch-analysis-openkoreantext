@@ -2,7 +2,7 @@ package org.apache.lucene.analysis.ko;
 
 import org.apache.logging.log4j.Logger;
 import org.elasticsearch.common.Strings;
-import org.elasticsearch.common.logging.ESLoggerFactory;
+import org.elasticsearch.common.logging.Loggers;
 import org.elasticsearch.index.analysis.OpenKoreanTextTokenizerFactory;
 import org.openkoreantext.processor.OpenKoreanTextProcessor;
 import scala.collection.JavaConverters;
@@ -22,7 +22,7 @@ import java.util.Map;
  */
 public class UserDictionaryLoader {
 
-    private static Logger logger = ESLoggerFactory.getLogger(UserDictionaryLoader.class);
+    private static Logger logger = Loggers.getLogger(UserDictionaryLoader.class, "open-korean-text");
 
     private final static Map<String, Boolean> loadedDictionaryFiles = new HashMap<>();
 

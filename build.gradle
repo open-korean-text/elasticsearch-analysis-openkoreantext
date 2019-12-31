@@ -1,10 +1,11 @@
 group 'org.openkoreantext'
-version '6.5.2.0'
+version '7.5.1.0'
 
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'signing'
 apply plugin: 'jacoco'
+apply plugin: 'idea'
 
 sourceCompatibility = 1.8
 
@@ -20,7 +21,7 @@ configurations {
 }
 
 ext {
-    elasticsearchVersion = '6.5.2'
+    elasticsearchVersion = '7.5.1'
     openKoreanTextVersion = '2.1.0'
 }
 

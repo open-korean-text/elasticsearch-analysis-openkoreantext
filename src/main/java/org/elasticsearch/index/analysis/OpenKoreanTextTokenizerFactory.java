@@ -13,7 +13,7 @@ import org.elasticsearch.index.IndexSettings;
 public class OpenKoreanTextTokenizerFactory extends AbstractTokenizerFactory {
 
     public OpenKoreanTextTokenizerFactory(IndexSettings indexSettings, Environment env, String name, Settings settings) {
-        super(indexSettings, name, settings);
+        super(indexSettings, settings, name);
         UserDictionaryLoader.loadDefaultUserDictionaries();
     }
 

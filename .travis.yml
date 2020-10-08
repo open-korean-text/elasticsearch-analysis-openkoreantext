@@ -4,8 +4,10 @@ jdk:
   - oraclejdk8
 
 env:
-  - JAVA_OPTS="-Xmx512m"
-  - TERM=dumb
+  global:
+    - JAVA_OPTS="-Xmx512m"
+  matrix:
+    - TERM=dumb
 
 sudo: false
 

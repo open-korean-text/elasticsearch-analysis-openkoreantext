@@ -8,6 +8,9 @@ Korean analysis plugin that integrates [open-korean-text](https://github.com/ope
 
 Elasticsearch 4.x 이하의 버전은 지원하지 않습니다.
 
+## Plugin에 사용자 사전을 입력하여 수정이 필요한 경우
+https://github.com/Keunyoung-Jung/sns-tokenizer-whole 로 방문하여 사용자사전을 받을 수 있습니다.
+
 ## Install
 
 ```shell

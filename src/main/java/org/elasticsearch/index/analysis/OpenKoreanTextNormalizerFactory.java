@@ -12,7 +12,7 @@ import java.io.Reader;
 /**
  * A ES character-filter factory for {@link OpenKoreanTextNormalizer}.
  */
-public class OpenKoreanTextNormalizerFactory extends AbstractCharFilterFactory implements MultiTermAwareComponent {
+public class OpenKoreanTextNormalizerFactory extends AbstractCharFilterFactory {
 
     public OpenKoreanTextNormalizerFactory(IndexSettings indexSettings, Environment env, String name, Settings settings) {
         super(indexSettings, name);
@@ -21,11 +21,6 @@ public class OpenKoreanTextNormalizerFactory extends AbstractCharFilterFactory i
     @Override
     public Reader create(Reader reader) {
         return new OpenKoreanTextNormalizer(reader);
-    }
-
-    @Override
-    public Object getMultiTermComponent() {
-        return this;
     }
 
     public static class OpenKoreanTextStemmerFactory extends AbstractTokenFilterFactory {

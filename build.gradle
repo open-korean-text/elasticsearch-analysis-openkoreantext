@@ -1,10 +1,11 @@
 group 'org.openkoreantext'
-version '6.5.2.0'
+version '7.16.0.0'
 
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'signing'
 apply plugin: 'jacoco'
+apply plugin: 'idea'
 
 sourceCompatibility = 1.8
 
@@ -20,8 +21,8 @@ configurations {
 }
 
 ext {
-    elasticsearchVersion = '6.5.2'
-    openKoreanTextVersion = '2.1.0'
+    elasticsearchVersion = '7.16.0'
+    openKoreanTextVersion = '2.3.1'
 }
 
 dependencies {
@@ -42,7 +43,7 @@ task makePluginDescriptor(type: Copy) {
             'name': 'elasticsearch-analysis-openkoreantext',
             'classname': 'org.elasticsearch.plugin.analysis.openkoreantext.AnalysisOpenKoreanTextPlugin',
             'description': 'Korean analysis plugin integrates open-korean-text module into elasticsearch.',
-            'version': '1.0.0',
+            'version': '7.16.0',
             'javaVersion': sourceCompatibility,
             'elasticsearchVersion' : elasticsearchVersion
         ]

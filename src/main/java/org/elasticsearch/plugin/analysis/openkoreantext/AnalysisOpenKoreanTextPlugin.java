@@ -19,11 +19,6 @@ public class AnalysisOpenKoreanTextPlugin extends Plugin implements AnalysisPlug
     }
 
     @Override
-    public Map<String, AnalysisModule.AnalysisProvider<CharFilterFactory>> getCharFilters() {
-        return singletonMap("openkoreantext-normalizer", OpenKoreanTextNormalizerFactory::new);
-    }
-
-    @Override
     public Map<String, AnalysisModule.AnalysisProvider<TokenizerFactory>> getTokenizers() {
         Map<String, AnalysisModule.AnalysisProvider<TokenizerFactory>> tokenizerFactories = new HashMap<>();
         tokenizerFactories.put("openkoreantext-tokenizer", OpenKoreanTextTokenizerFactory::new);

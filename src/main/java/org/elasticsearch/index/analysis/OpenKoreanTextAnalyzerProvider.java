@@ -14,7 +14,7 @@ public class OpenKoreanTextAnalyzerProvider extends AbstractIndexAnalyzerProvide
     private final OpenKoreanTextAnalyzer analyzer;
 
     public OpenKoreanTextAnalyzerProvider(IndexSettings indexSettings, Environment env, String name, Settings settings) {
-        super(indexSettings, name, settings);
+        super(name);
         analyzer= new OpenKoreanTextAnalyzer();
         UserDictionaryLoader.loadDefaultUserDictionaries();
     }

@@ -2,7 +2,6 @@ package org.apache.lucene.analysis.ko;
 
 import org.apache.lucene.analysis.*;
 import org.apache.lucene.analysis.miscellaneous.LengthFilter;
-import org.apache.lucene.analysis.standard.ClassicFilter;
 
 import java.io.Reader;
 import java.util.Arrays;
@@ -36,7 +35,6 @@ public class OpenKoreanTextAnalyzer extends StopwordAnalyzerBase {
 
         TokenStream tokenStream = new OpenKoreanTextStemmer(tokenizer);
         tokenStream = new OpenKoreanTextRedundantFilter(tokenStream);
-        tokenStream = new ClassicFilter(tokenStream);
         tokenStream = new LengthFilter(tokenStream, 0, MAX_TOKEN_LENGTH);
         tokenStream = new LowerCaseFilter(tokenStream);
 

@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import java.io.StringReader;
 
-public class OpenKoreanTextNormalizerTest {
+public class TestOpenKoreanTextNormalizer {
     @Test
     public void testNormalizerCharFilter() throws Exception {
         String query = "한국어를 처리하는 예시입니닼ㅋ. 오픈코리안텍스틓ㅎㅎㅎㅎㅎㅎㅎ";

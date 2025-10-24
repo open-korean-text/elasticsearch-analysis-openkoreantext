@@ -10,7 +10,6 @@ import scala.collection.JavaConverters;
 import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
-import java.security.AccessControlException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,7 +38,7 @@ public class UserDictionaryLoader {
             if(dicDirectory.isDirectory()) {
                 dicFiles = dicDirectory.listFiles();
             }
-        } catch (AccessControlException e) {
+        } catch (SecurityException e) {
             logger.error("Can not load dictionary files", e);
         }
     }

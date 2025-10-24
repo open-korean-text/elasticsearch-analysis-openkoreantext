@@ -6,8 +6,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.io.StringReader;
 
-public class OpenKoreanTextStemmerTest  {
-
+public class TestOpenKoreanTextStemmer  {
     @Test
     public void testBasicUsage() throws IOException {
         String query = "한국어를 처리하는 예시입니다ㅋㅋ";

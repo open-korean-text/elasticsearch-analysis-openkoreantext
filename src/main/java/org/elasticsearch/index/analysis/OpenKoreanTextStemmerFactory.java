@@ -12,7 +12,7 @@ import org.elasticsearch.index.IndexSettings;
 public class OpenKoreanTextStemmerFactory extends AbstractTokenFilterFactory {
 
     public OpenKoreanTextStemmerFactory(IndexSettings indexSettings, Environment env, String name, Settings settings) {
-        super(indexSettings, name, settings);
+        super(name);
     }
 
     @Override

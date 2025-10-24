@@ -1,37 +1,40 @@
 group 'org.openkoreantext'
-version '6.5.2.0'
+version '9.1.4.0'
 
 apply plugin: 'java'
-apply plugin: 'maven'
+apply plugin: 'maven-publish'
 apply plugin: 'signing'
 apply plugin: 'jacoco'
+apply plugin: 'idea'
 
-sourceCompatibility = 1.8
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
 
 repositories {
     mavenCentral()
-    jcenter()
 }
 
 configurations {
     distJars {
-        extendsFrom runtime
+        extendsFrom runtimeClasspath
     }
 }
 
 ext {
-    elasticsearchVersion = '6.5.2'
-    openKoreanTextVersion = '2.1.0'
+    elasticsearchVersion = '9.1.4'
+    openKoreanTextVersion = '2.3.1'
 }
 
 dependencies {
-    compile group: 'org.openkoreantext', name: 'open-korean-text', version: openKoreanTextVersion
+    implementation group: 'org.openkoreantext', name: 'open-korean-text', version: openKoreanTextVersion
 
     compileOnly group: 'org.elasticsearch', name: 'elasticsearch', version: elasticsearchVersion
 
-    testCompile group: 'org.elasticsearch.test', name: 'framework', version: elasticsearchVersion
-    testCompile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.9.1'
-    testCompile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.9.1'
+    testImplementation group: 'org.elasticsearch.test', name: 'framework', version: elasticsearchVersion
+    testImplementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.19.0'
+    testImplementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.19.0'
 }
 
 task makePluginDescriptor(type: Copy) {
@@ -39,11 +42,11 @@ task makePluginDescriptor(type: Copy) {
     into 'build/tmp/plugin'
     expand([
         'descriptor': [
-            'name': 'elasticsearch-analysis-openkoreantext',
+            'name': 'analysis-openkoreantext',
             'classname': 'org.elasticsearch.plugin.analysis.openkoreantext.AnalysisOpenKoreanTextPlugin',
             'description': 'Korean analysis plugin integrates open-korean-text module into elasticsearch.',
-            'version': '1.0.0',
-            'javaVersion': sourceCompatibility,
+            'version': '9.1.4',
+            'javaVersion': java.sourceCompatibility,
             'elasticsearchVersion' : elasticsearchVersion
         ]
     ])
@@ -51,16 +54,17 @@ task makePluginDescriptor(type: Copy) {
 
 task buildPluginZip(type: Zip, dependsOn: [':jar', ':makePluginDescriptor']) {
     from configurations.distJars
-    from jar.archivePath
+    from jar.archiveFile
     from 'build/tmp/plugin'
     into '.'
-    classifier = 'plugin'
+    archiveBaseName = 'elasticsearch-analysis-openkoreantext'
+    archiveClassifier = 'plugin'
 }
 
 build.finalizedBy(buildPluginZip)
 
 task javadocJar(type: Jar) {
-    classifier = 'javadoc'
+    archiveClassifier = 'javadoc'
     from javadoc
 }
 
@@ -71,7 +75,7 @@ tasks.withType(Javadoc) {
 }
 
 task sourcesJar(type: Jar) {
-    classifier = 'sources'
+    archiveClassifier = 'sources'
     from sourceSets.main.allSource
 }
 
@@ -86,14 +90,14 @@ test {
 }
 
 jacoco {
-    toolVersion = '0.7.1.201405082137'
+    toolVersion = '0.8.12'
 }
 
 jacocoTestReport {
     reports {
-        html.enabled = true
-        xml.enabled = true
-        csv.enabled = false
+        html.required = true
+        xml.required = true
+        csv.required = false
     }
 }
 
@@ -102,12 +106,8 @@ task jacocoRootReport(type: org.gradle.testing.jacoco.tasks.JacocoReport) {
     classDirectories =  files(sourceSets.main.output)
     executionData = files(jacocoTestReport.executionData)
     reports {
-        html.enabled = true
-        xml.enabled = true
-        csv.enabled = false
+        html.required = true
+        xml.required = true
+        csv.required = false
     }
-}
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '3.4'
 }

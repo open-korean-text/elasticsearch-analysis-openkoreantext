@@ -10,7 +10,7 @@ import java.io.IOException;
 
 import static org.hamcrest.Matchers.instanceOf;
 
-public class OpenKoreanTextAnalyzerTest extends ESTestCase {
+public class TestOpenKoreanTextAnalyzer extends ESTestCase {
     public void testDefaultComponentsLoading() throws IOException {
         TestAnalysis analysis =  createTestAnalysis(new Index("test", "_na_"), Settings.EMPTY, new AnalysisOpenKoreanTextPlugin());
 

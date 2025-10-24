@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.io.StringReader;
 
-public class OpenKoreanTextRedundantFilterTest {
+public class TestOpenKoreanTextRedundantFilter {
     @Test
     public void testBasicUsage() throws IOException {
         String query = "그리고 이것은 예시, 또는 예로써, 한국어를 처리하기 입니다";

@@ -8,6 +8,9 @@ Korean analysis plugin that integrates [open-korean-text](https://github.com/ope
 
 Elasticsearch 4.x 이하의 버전은 지원하지 않습니다.
 
+## Plugin에 사용자 사전을 입력하여 수정이 필요한 경우
+https://github.com/Keunyoung-Jung/sns-tokenizer-whole 로 방문하여 사용자사전을 받을 수 있습니다.
+
 ## Install
 
 ```shell
@@ -15,7 +18,7 @@ $ cd ${ES_HOME}
 $ bin/elasticsearch-plugin install {download URL}
 ```
 
-설치 후 `bin/elasticsearch` 실행 시, `loaded plugin [elasticsearch-analysis-openkoreantext]` 라는 로그가 출력되는지 확인합니다.
+설치 후 `bin/elasticsearch` 실행 시, `loaded plugin [analysis-openkoreantext]` 라는 로그가 출력되는지 확인합니다.
 
 **download URL 은 아래 [Compatible Versions](#compatible-versions)를 참고하여 Elasticsearch 버젼에 맞는 Plugin 버젼을 다운로드 받아야합니다.**
 
@@ -112,12 +115,12 @@ Elasticsearch의 default analyzer를 사용했을 경우
 ## User Dictionary
 [기본사전](https://github.com/open-korean-text/open-korean-text/tree/master/src/main/resources/org/openkoreantext/processor/util) 이외에 사용자가 원하는 단어를 추가하여 사용할 수 있습니다. 예를들어 `말썽쟁이`를 분석하면 `말썽(Noun)`과 `쟁이(suffix)`로 추출되지만, 사전에 `말썽쟁이`를 추가하면 `말썽쟁이(Noun)`로 추출할 수 있습니다.
 
-Analyzer Plugin을 설치하면 `{ES_HOME}/plugins/elasticserach-analysis-openkoreantext` 위치에 `dic/` 디렉토리를 찾을 수 있습니다. 해당 디렉토리 안에 사전 텍스트 파일을 추가하면 됩니다.
+Analyzer Plugin을 설치하면 `{ES_HOME}/plugins/analysis-openkoreantext` 위치에 `dic/` 디렉토리를 찾을 수 있습니다. 해당 디렉토리 안에 사전 텍스트 파일을 추가하면 됩니다.
 
 사전 텍스트 파일은 각 단어들을 줄바꿈하여 넣으면 됩니다. (단, 띄워쓰기는 단어로 인식하지 않습니다.)
 
 ```plain
-# {ES_HOME}/plugins/elasticserach-analysis-openkoreantext/dic/sampledictionary
+# {ES_HOME}/plugins/analysis-openkoreantext/dic/sampledictionary
 말썽쟁이
 뚜쟁이
 욕쟁이할머니
